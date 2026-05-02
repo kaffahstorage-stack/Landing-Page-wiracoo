@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wiracom Banjarbaru</title>
+  <style>
+    body {font-family: Arial, sans-serif;margin:0;background:#f5f7fb;color:#333}
+    header {background:linear-gradient(135deg,#0f172a,#1e3a8a);color:white;padding:25px;text-align:center}
+    header h1{margin:0;font-size:26px}
+    header p{margin:5px 0 0;font-size:14px;opacity:0.9}
+    .container{padding:20px;max-width:1100px;margin:auto}
+    .section-title{margin:30px 0 10px;font-size:22px;font-weight:bold}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
+    .card{background:white;padding:15px;border-radius:14px;box-shadow:0 4px 12px rgba(0,0,0,0.08);transition:0.2s}
+    .card:hover{transform:translateY(-3px)}
+    .card img{width:100%;border-radius:10px;height:140px;object-fit:cover}
+    .price{color:#16a34a;font-weight:bold;margin:5px 0}
+    .btn-wa{display:inline-block;margin-top:10px;padding:8px 12px;background:#25D366;color:white;text-decoration:none;border-radius:8px;font-size:14px}
+    .btn-call{display:inline-block;margin-top:10px;padding:8px 12px;background:#2563eb;color:white;text-decoration:none;border-radius:8px;font-size:14px}
+    .map{margin-top:20px;border-radius:12px;overflow:hidden}
+    .testimoni{background:white;padding:15px;border-radius:12px;margin-top:10px;box-shadow:0 2px 8px rgba(0,0,0,0.08)}
+    .stars{color:gold}
+    footer{text-align:center;padding:20px;font-size:14px;color:#666}
+	.map iframe {
+  width: 100%;
+  height: 350px;
+  border-radius: 12px;
+}
+/* animasi awal (sembunyi dulu) */
+.anim {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+
+/* saat muncul */
+.anim.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* shimmer effect */
+@keyframes shimmer {
+  0% {background-position: -400px 0;}
+  100% {background-position: 400px 0;}
+}
+
+.skeleton {
+  background: #e5e7eb;
+  background-image: linear-gradient(
+    90deg,
+    #e5e7eb 0px,
+    #f3f4f6 40px,
+    #e5e7eb 80px
+  );
+  background-size: 600px;
+  animation: shimmer 1.2s infinite linear;
+  border-radius: 8px;
+}
+
+/* ukuran skeleton */
+.skel-title {height: 20px; width: 70%; margin-bottom: 10px;}
+.skel-text {height: 15px; width: 100%; margin-bottom: 6px;}
+.skel-btn {height: 30px; width: 80px; margin-top: 10px;}
+	
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+  align-items: stretch;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}	
+	.card .btn-wa {
+  margin-top: 10px;
+}
+	#infoBar {
+  letter-spacing: 0.5px;
+}
+.wa-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #25D366;
+  color: white;
+  font-size: 24px;
+  padding: 12px 16px;
+  border-radius: 50%;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 999;
+  transition: 0.3s;
+}
+
+.wa-float:hover {
+  transform: scale(1.1);
+}	
+	@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.wa-float {
+  animation: pulse 2s infinite;
+}
+	.wa-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  z-index: 999;
+}
+
+/* bubble text */
+.wa-text {
+  background: white;
+  color: #333;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  opacity: 0;
+  transform: translateX(20px);
+  transition: 0.3s;
+}
+
+/* icon WA */
+.wa-icon {
+  background: #25D366;
+  padding: 12px;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+/* hover effect */
+.wa-container:hover .wa-text {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.wa-container:hover .wa-icon {
+  transform: scale(1.1);
+}
+
+/* animasi muncul */
+@keyframes floatUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wa-container {
+  animation: floatUp 0.6s ease;
+}
+	.section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+	.btn-group {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+
+
+.remove-btn {
+  background: red;
+  color: white;
+  border: none;
+  font-size: 12px;
+  padding: 3px 6px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.cart-footer {
+  border-top: 1px solid #ddd;
+  padding-top: 8px;
+  font-size: 13px;
+  text-align: right;
+}
+
+@keyframes fadeIn {
+  from {opacity:0; transform:translateY(-10px);}
+  to {opacity:1; transform:translateY(0);}
+}
+	#cart-items li {
+  background: #f3f4f6;
+  padding: 8px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.qty-control {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 5px;
+}
+
+.qty-control button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 2px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.remove-btn {
+  background: red;
+  color: white;
+  border: none;
+  font-size: 11px;
+  padding: 3px 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.checkout-btn {
+  margin-top: 10px;
+  width: 100%;
+  padding: 8px;
+  background: #25D366;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+	.cart-item-top {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cart-item-top input {
+  transform: scale(1.2);
+}
+	#checkout-btn {
+  display: none;
+}
+	
+
+.btn-wa:hover {
+  background: #16a34a;
+  transform: scale(1.03);
+}
+	.btn-group .btn-wa {
+  flex:1;
+}
+	.cart-popup {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: 0.2s;
+}
+	.cart-popup {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  background: white;
+  padding: 15px;
+  border-radius: 16px;
+  width: 280px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+  display: none;
+
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: 0.2s;
+}
+	#cart-items li {
+  background: #f9fafb;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  border: 1px solid #eee;
+  transition: 0.2s;
+}
+
+#cart-items li:hover {
+  background: #f3f4f6;
+}
+
+.cart-item-name {
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.cart-price {
+  font-size: 12px;
+  color: #666;
+}
+
+.qty-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 6px;
+}
+
+.qty-control button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 3px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.remove-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+	.grid-rakit {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 300px));
+  justify-content: center; /* ini kunci biar gak melebar */
+  gap: 15px;
+}
+	.scroll-wrapper {
+  position: relative;
+}
+
+.layanan-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+}
+/* biar gak ada scrollbar jelek */
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-container .card {
+  min-width: 250px;
+}
+
+/* tombol panah */
+.scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #1e3a8a;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  opacity: 0.8;
+}
+
+.scroll-btn:hover {
+  opacity: 1;
+}
+
+.scroll-btn.left {
+  left: -10px;
+}
+
+.scroll-btn.right {
+  right: -10px;
+}
+	.scroll-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 15px;
+  padding: 10px 5px;
+  scroll-behavior: smooth;
+
+ 
+  -webkit-overflow-scrolling: touch;
+}
+
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-container .card {
+  min-width: 250px;
+  scroll-snap-align: start;
+}
+	.scroll-container {
+  cursor: grab;
+}
+
+.scroll-container:active {
+  cursor: grabbing;
+}
+	.scroll-container {
+  user-select: none;
+}
+	.scroll-container {
+  scroll-snap-type: x mandatory;
+}
+	#welcomePopup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+
+  opacity: 1;
+  animation: fadeOut 0.8s ease forwards;
+  animation-delay: 1.5s;
+}
+
+.welcome-box {
+  background: white;
+  padding: 25px 40px;
+  border-radius: 16px;
+  text-align: center;
+  transform: scale(0.7);
+  animation: popIn 0.5s ease forwards;
+}
+
+.welcome-box h1 {
+  margin: 0;
+  color: #0f172a;
+  font-size: 24px;
+}
+
+.welcome-box p {
+  margin-top: 8px;
+  color: #64748b;
+}
+
+/* animasi masuk */
+@keyframes popIn {
+  to {
+    transform: scale(1);
+  }
+}
+
+/* animasi hilang */
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+	.running-text {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #0f172a;
+  color: white;
+  overflow: hidden;
+  z-index: 9999;
+  border-top: 2px solid #1e3a8a;
+}
+
+.running-track {
+  display: flex;
+  white-space: nowrap;
+  width: fit-content;
+  animation: scrollText 15s linear infinite;
+}
+
+.running-track span {
+  padding-left: 100%;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+/* animasi jalan */
+@keyframes scrollText {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+	.marquee-wrapper {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #0b1220;
+  padding: 8px 10px;
+  z-index: 9999;
+  border-top: 2px solid #1e3a8a;
+}
+
+/* slider speed */
+#speedSlider {
+  width: 150px;
+  margin-bottom: 5px;
+}
+
+/* marquee area */
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* teks jalan */
+#marqueeText {
+  display: inline-block;
+  padding-left: 100%;
+  font-size: 14px;
+  font-weight: bold;
+
+  /* 🔥 gradient text */
+  background: linear-gradient(90deg,#22c55e,#3b82f6,#a855f7,#22c55e);
+  background-size: 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* ✨ glow effect */
+  filter: drop-shadow(0 0 6px rgba(34,197,94,0.6));
+
+  animation: moveText 15s linear infinite, glowMove 3s ease infinite;
+}
+
+/* jalan kiri */
+@keyframes moveText {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+/* gradient gerak */
+@keyframes glowMove {
+  0% { background-position: 0% }
+  100% { background-position: 300% }
+}
+	
+	footer {
+  position: relative;
+  z-index: 1;
+  background: #f5f7fb;
+}
+.footer-info {
+  background: #0f172a;
+  color: white;
+  padding: 30px 20px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.footer-box h3 {
+  margin-bottom: 10px;
+  color: #60a5fa;
+}
+
+.footer-box p {
+  font-size: 14px;
+  margin: 5px 0;
+  opacity: 0.9;
+}
+
+/* biar footer lama tetap rapi */
+footer {
+  background: #020617;
+  color: #aaa;
+}
+.faq {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.faq-item {
+  background: #111827;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.faq-question {
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  background: #1f2937;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.faq-question:hover {
+  background: #374151;
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 12px;
+  font-size: 13px;
+  color: #d1d5db;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 12px;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+.card {
+  position: relative; /* penting biar badge nempel di card */
+}
+
+.badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #ef4444;
+  color: white;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  color: #fff;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: background-image 1s ease-in-out;
+}
+
+/* overlay biar teks kebaca */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5); /* gelap transparan */
+  z-index: -1;
+}
+
+/* biar card tetap putih jelas */
+.card, .footer-info, footer, .map, .container {
+  position: relative;
+  z-index: 1;
+}
+.card {
+  color: #333;
+}
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  border-radius: 10px;
+  background: white;
+  padding: 5px;
+}
+.card small {
+  color: #888;
+  font-size: 12px;
+}
+.img-viewer {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
+
+.img-viewer img {
+  max-width: 90%;
+  max-height: 85%;
+  border-radius: 12px;
+  animation: zoomIn 0.3s ease;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 35px;
+  color: white;
+  cursor: pointer;
+}
+
+@keyframes zoomIn {
+  from {transform: scale(0.8); opacity: 0;}
+  to {transform: scale(1); opacity: 1;}
+}
+.card img {
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.card img:hover {
+  transform: scale(1.03);
+}
+.card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  object-position:center;
+  border-radius:10px;
+}
+.container {
+  padding: 15px;
+  max-width: 900px; /* sebelumnya 1100 */
+}
+.card {
+  padding: 12px;
+  border-radius: 12px;
+}
+.grid {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 18px;
+  }
+
+  .section-title {
+    font-size: 16px;
+  }
+
+  .card {
+    padding: 10px;
+  }
+
+  .card img {
+    height: 140px;
+  }
+}
+#scrollBtn {
+  position: fixed;
+  bottom: 90px; /* biar di atas WA */
+  right: 20px;
+
+  width: 50px;
+  height: 50px;
+
+  background: #1e3a8a;
+  color: white;
+  border: none;
+
+  border-radius: 50%; /* 🔥 ini bikin bulat sempurna */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 20px;
+  cursor: pointer;
+
+  z-index: 999;
+
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  transition: 0.25s;
+}
+
+#scrollBtn:hover {
+  transform: scale(1.1);
+}
+
+
+
+	
+	
+	
+  </style>
+  <div id="welcomePopup">
+  <div class="welcome-box">
+    <h1>Selamat Datang 👋</h1>
+    <p>Di Wiracom Banjarbaru</p>
+  </div>
+</div>
+</head>
+<a href="https://wa.me/6281234567890?text=Halo%20kak,%20saya%20butuh%20bantuan" 
+   target="_blank" 
+   class="wa-container">
+
+  <div class="wa-text">Butuh Bantuan?</div>
+
+  <div class="wa-icon">
+    <svg viewBox="0 0 32 32" width="24" height="24">
+      <path fill="white" d="M16 .396C7.163.396 0 7.558 0 16.396c0 2.894.756 5.716 2.197 8.204L0 32l7.592-2.157a15.92 15.92 0 0 0 8.408 2.413c8.837 0 16-7.163 16-16S24.837.396 16 .396zm0 29.07a13.01 13.01 0 0 1-6.646-1.81l-.476-.282-4.506 1.28 1.202-4.39-.31-.45a12.93 12.93 0 0 1-2.008-6.918c0-7.168 5.832-13 13-13s13 5.832 13 13-5.832 13-13 13zm7.39-9.724c-.403-.202-2.387-1.177-2.757-1.31-.37-.134-.64-.202-.91.202s-1.044 1.31-1.28 1.58c-.235.27-.47.303-.873.1-.403-.202-1.7-.627-3.24-2-1.198-1.07-2.008-2.39-2.243-2.793-.235-.404-.025-.623.177-.825.182-.18.403-.47.605-.705.202-.235.27-.403.403-.672.134-.27.067-.504-.034-.706-.1-.202-.91-2.19-1.247-3-.327-.787-.66-.68-.91-.693-.235-.012-.504-.015-.774-.015-.27 0-.706.1-1.075.504-.37.403-1.41 1.378-1.41 3.356 0 1.98 1.445 3.89 1.647 4.158.202.27 2.843 4.34 6.89 6.08.963.415 1.713.663 2.298.848.965.307 1.844.264 2.538.16.774-.115 2.387-.975 2.724-1.918.336-.944.336-1.754.235-1.918-.1-.164-.37-.27-.774-.47z"/>
+    </svg>
+  </div>
+
+</a>
+
+
+<header>
+  <div class="header-content">
+    <img src="assets/logo.png" alt="Logo Wiracom" class="logo">
+    
+    <div>
+      <h1>Wiracom Banjarbaru</h1>
+      <p>Spesialis Printer • Laptop • PC • Sound System</p>
+    </div>
+  </div>
+</header>
+<div id="infoBar" style="background:#facc15;color:#000;padding:10px;text-align:center;font-weight:bold;transition:0.5s;">
+  🔥 Promo Service Laptop mulai 75rb! Hubungi sekarang juga 🔥
+</div>
+
+
+<div class="container">
+
+  <div class="section-title">⭐ Kenapa Pilih Kami?</div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>⚡ Cepat</h3>
+      <p>Pengerjaan cepat & aman 😁</p>
+    </div>
+
+    <div class="card">
+      <h3>💯 Berpengalaman</h3>
+      <p>Sudah ada sejak 2012</p>
+    </div>
+
+    <div class="card">
+      <h3>💬 Konsultasi Gratis</h3>
+      <p>Bisa tanya dulu tanpa biaya</p>
+    </div>
+	
+	<div class="card">
+      <h3>💯Berpengalaman dalam bidang Sound system</h3>
+      <p>Sudah menghandle lebih dari 5 masjid di Banjarbaru dan sekitarnya😁</p>
+    </div>
+	
+  </div>
+
+</div>
+
+  <div class="section-title">⚡ Ingin Merakit / membeli Sesuatu?</div>
+
+  <div class="grid-rakit">
+
+    <div class="card">
+      <h3>💻 Rakit PC</h3>
+      <p>Konsultasi & rakit PC sesuai kebutuhan</p>
+      <button class="btn-wa" onclick="chatRakit('Rakit PC')">
+        Chat WA
+      </button>
+    </div>
+
+    <div class="card">
+      <h3>🔊 Rakit Speaker</h3>
+      <p>Rakit speaker untuk rumah, masjid, dll</p>
+      <button class="btn-wa" onclick="chatRakit('Rakit Sound System')">
+        Chat WA
+      </button>
+    </div>
+	
+    <div class="card">
+      <h3>🔊 Rakit Mixer</h3>
+      <p>Rakit Mixer untuk rumah, masjid, dll</p>
+      <button class="btn-wa" onclick="chatRakit('Rakit PC')">
+        Chat WA
+      </button>
+    </div>
+	
+	<div class="card">
+      <h3>🔊 Rakit Amplifier / Ampli</h3>
+      <p>Rakit Amplifier / ampli untuk rumah, masjid, dll</p>
+      <button class="btn-wa" onclick="chatRakit('Rakit PC')">
+        Chat WA
+      </button>
+    </div>
+	
+	 <div class="card">
+      <h3>💻 Beli Laptop</h3>
+      <p>Konsultasi & beli laptop sesuai kebutuhan</p>
+      <button class="btn-wa" onclick="chatRakit('Rakit PC')">
+        Chat WA
+      </button>
+    </div>
+	
+	 <div class="card">
+      <h3>🔊 Beli Mixer</h3>
+      <p>Beli mixer sesuai kebutuhan</p>
+      <button class="btn-wa" onclick="chatRakit('Rakit PC')">
+        Chat WA
+      </button>
+    </div>
+	
+	<div class="card">
+      <h3>🔊 Beli Amplifier</h3>
+      <p>Beli amplifier sesuai kebutuhan</p>
+      <button class="btn-wa" onclick="chatRakit('Rakit PC')">
+        Chat WA
+      </button>
+    </div>
+	
+	
+	
+	
+	
+	
+	
+  </div>
+
+</div>
+
+<div class="section-title">⚠️ Kerusakan yang Sering Terjadi</div>
+
+<div class="grid">
+
+  <div class="card">
+  <div class="badge">⚡ Sering</div>
+    <h3>💻 Laptop Lemot</h3>
+    <p>Penyebab: RAM kecil, HDD penuh / rusak, atau virus</p>
+    
+  </div>
+
+  <div class="card">
+  <div class="badge">⚡ Sering</div>
+    <h3>🖨️ Printer Tidak Keluar Tinta</h3>
+    <p>Biasanya karena tinta kering atau head mampet</p>
+    
+  </div>
+
+  <div class="card">
+  <div class="badge">⚡ Sering</div>
+    <h3>💻 Laptop Tidak Nyala</h3>
+    <p>Bisa karena IC power, baterai, atau charger rusak</p>
+    
+  </div>
+
+  <div class="card">
+  <div class="badge">⚡ Sering</div>
+    <h3>🖥️ PC Restart Sendiri</h3>
+    <p>Biasanya karena PSU lemah atau overheat</p>
+    
+  </div>
+
+  <div class="card">
+    <h3>🔊 Speaker Tidak Bunyi</h3>
+    <p>Masalah pada kabel, amplifier, atau speaker</p>
+    
+  </div>
+
+  <div class="card">
+    <h3>🌐 Wifi Tidak Tersambung</h3>
+    <p>Bisa dari driver, router, atau setting jaringan</p>
+    
+  </div>
+
+  <div class="card">
+    <h3>🔥 Laptop Panas Berlebih</h3>
+    <p>Biasanya kipas kotor atau thermal paste kering</p>
+    
+  </div>
+
+  <div class="card">
+    <h3>🖨️ Printer Error / Lampu Kedip</h3>
+    <p>Indikasi waste ink penuh atau error sistem</p>
+    
+  </div>
+  
+  <div class="card">
+  <div class="badge">⚡ Sering</div>
+    <h3>💻 Internet Lemot</h3>
+    <p>Bisa karena routernya kurang kencang dll </p>
+    
+  </div>
+
+</div>
+  
+
+  <div class="section-title">🛠️ Layanan Kami</div>
+
+<div class="layanan-grid">
+
+  <!-- ASLI -->
+  <div class="card">
+    <h3>Service Printer</h3>
+    <p>Perbaikan & maintenance semua jenis printer</p>
+    <button class="btn-wa" onclick="chatLayanan(this)">
+  Chat WA
+</button>
+  </div>
+
+  <div class="card">
+  <div class="badge">🔥 Paling Laris</div>
+
+  <h3>Service Laptop</h3>
+  <p> ganti hardware, perbaikan laptop</p>
+ <button class="btn-wa" onclick="chatLayanan(this)">
+  Chat WA
+</button>
+</div>
+
+  <div class="card">
+  <div class="badge">🔥 Hot</div>
+  
+    <h3>Service PC</h3>
+    <p>Rakit PC, upgrade & perbaikan</p>
+    <button class="btn-wa" onclick="chatLayanan(this)">
+  Chat WA
+</button>
+  </div>
+
+  <div class="card">
+  
+  
+    <h3>Sound System</h3>
+    <p>Perbaikan speaker & amplifier</p>
+    <button class="btn-wa" onclick="chatLayanan(this)">
+  Chat WA
+</button>
+  </div>
+
+  <div class="card">
+    <h3>CCTV</h3>
+    <p>Pasang & perbaikan CCTV</p>
+    <button class="btn-wa" onclick="chatLayanan(this)">
+  Chat WA
+</button>
+  </div>
+
+  <div class="card">
+  <div class="badge">🔥 Paling Laris</div>
+  
+    <h3>Sound System Masjid</h3>
+    <p>Pasang & perbaikan speaker masjid</p>
+    <button class="btn-wa" onclick="chatLayanan(this)">
+  Chat WA
+</button>
+  </div>
+
+  <div class="card">
+  <div class="badge">🔥 Start From 100k</div>
+  
+    <h3>Pembuatan Website</h3>
+    <p>Pembuatan website berbasis JavaScript, CSS, HTML</p>
+    <button class="btn-wa" onclick="chatLayanan(this)">
+  Chat WA
+</button>
+  </div>
+
+  <div class="card">
+    <h3>Sewa Sound System</h3>
+    <p>Sewa sound system untuk acara & masjid</p>
+    <button class="btn-wa" onclick="chatLayanan(this)">
+  Chat WA
+</button>
+  </div>
+  
+  <div class="card">
+  <div class="badge">🔥 Paling Laris</div>
+
+  <h3>Install ulang</h3>
+  <p>Install ulang laptop dan PC </p>
+  <button class="btn-wa" onclick="chatLayanan(this)">
+  Chat WA
+</button>
+</div>
+
+<div class="card">
+  <div class="badge">🔥 Paling Laris</div>
+  
+    <h3>Meningkatkan Kecepatan internet</h3>
+    <p>meningkatkan kecepatan internet untuk kantor</p>
+    <button class="btn-wa" onclick="chatLayanan(this)">
+  Chat WA
+</button>
+  </div>
+  
+  <div class="card">
+  <div class="badge">🔥 Paling Laris</div>
+  
+    <h3>Pasang corong masjid / mushala</h3>
+    <p>memasang corong untuk masjid / mushala</p>
+    <button class="btn-wa" onclick="chatLayanan(this)">
+  Chat WA
+</button>
+  </div>
+  
+
+
+
+</div>
+  
+  <div class="container">
+  <div class="section-title">📸 Dokumentasi Kegiatan ( Gambarnya bisa di klik 😁 )</div>
+
+  <div class="grid">
+
+    <div class="card">
+      <img src="assets/kegiatan/uas.jpg" alt="Kajian UAS">
+      <h3>Kajian UAS di Banjarbaru</h3>
+      <p><small>2 Feb 2026</small></p>
+      <p>
+        2 Feb 2026 Kajian UAS di Gunung Kupang Masjid Ponpes Nurul Azhar. Wira Audio Banjarbaru, untuk kedua kalinya di percaya meng handle acar pengajian UAS. Alhamdulillah TUAN Guru puas dengan Sound System kami.
+      </p>
+     
+	  <a class="btn-wa" href="https://wa.me/6282337354131">
+  Tanya Layanan Ini
+</a>
+    </div>
+
+    <div class="card">
+      <img src="assets/kegiatan/Ridho Febri.jpg" alt="Sound System Masjid">
+      <h3>Kajian Ustad Ridho Febri</h3>
+      <p><small>29 April 2024</small></p>
+      <p>
+        29 April 2024 Kajian Ustadz Ridho Febri di Masjid Arraudhah wiyata. Wira Audio Banjarbaru, Alhamdulillah TUAN Guru puas dengan Sound System kami.
+      </p>
+      <p>
+        Hasil suara jernih & menjangkau seluruh area masjid.
+      </p>
+	  <a class="btn-wa" href="https://wa.me/6282337354131">
+  Tanya Layanan Ini
+</a>
+    </div>
+
+    
+</div>
+
+  
+
+  
+
+ 
+  
+  
+
+<div class="section-title">📍 Lokasi Toko</div>
+<div class="map">
+  <iframe 
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4765.650417756335!2d114.79806417573798!3d-3.4443953417949262!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de6822ad1ccd5df%3A0xa14f334dfa15a38e!2sWIRACOM%20Banjarbaru!5e1!3m2!1sid!2sid!4v1777520326139!5m2!1sid!2sid"
+    width="100%" 
+    height="350"
+    style="border:0;"
+    allowfullscreen=""
+    loading="lazy">
+  </iframe>
+</div>
+<div class="footer-info">
+
+  <div class="footer-grid">
+
+    <!-- FAQ -->
+    <div class="footer-box">
+  <h3>❓ FAQ</h3>
+
+  <div class="faq">
+
+    <div class="faq-item">
+      <button class="faq-question">Apakah bisa panggilan ke rumah?</button>
+      <div class="faq-answer">
+        Bisa 😁 tergantung lokasi dan jenis service yang dibutuhkan.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">Apakah ada garansi service?</button>
+      <div class="faq-answer">
+        Ada untuk beberapa layanan seperti laptop, PC, dan printer.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">Bisa konsultasi dulu?</button>
+      <div class="faq-answer">
+        Bisa banget, konsultasi gratis tanpa biaya 😁
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">Berapa lama proses service?</button>
+      <div class="faq-answer">
+        Tergantung kerusakan, biasanya 1–5 hari untuk kerusakan ringan.
+      </div>
+    </div>
+	
+	<div class="faq-item">
+      <button class="faq-question">Apakah ada biaya checkin?</button>
+      <div class="faq-answer">
+        Ada kalau misalnya costumernya cancel 😁
+      </div>
+    </div>
+
+  </div>
+</div>
+
+    <!-- Kontak -->
+    <div class="footer-box">
+      <h3>📞 Kontak</h3>
+      <p>WhatsApp: 0823-3735-4131</p>
+      <p>Email: wiranet.bjb@gmail.com</p>
+	  <p>Facebook: @Muchtar Rusliadi Azthar</p>
+	  <p>Instagram: @wiranet.bjb
+    </div>
+
+    <!-- Lokasi -->
+    <div class="footer-box">
+      <h3>📍 Lokasi</h3>
+      <p>Banjarbaru, Kalimantan Selatan</p>
+      <p>Jl. Sidomulyo II, Guntung Payung, Kec. Landasan Ulin, Kota Banjar Baru, Kalimantan Selatan 70721</p>
+    </div>
+
+    <!-- Jam -->
+    <div class="footer-box">
+      <h3>⏰ Jam Operasional</h3>
+      <p>Senin - Sabtu</p>
+      <p>08.00 - 17.00</p>
+      <p>Minggu: Tutup</p>
+    </div>
+
+  </div>
+
+</div>
+<footer>
+  © 2026 Wiracom Banjarbaru
+</footer>
+<div id="imgViewer" class="img-viewer">
+  <span class="close-btn">&times;</span>
+  <img id="viewerImg" src="">
+</div>
+<button id="scrollBtn">⬇</button>
+<script>
+console.log("JS jalan");
+function searchProduk(){
+  let input = document.getElementById('search').value.toLowerCase();
+  let items = document.getElementsByClassName('produk');
+
+  for(let i=0;i<items.length;i++){
+    let text = items[i].innerText.toLowerCase();
+    items[i].style.display = text.includes(input) ? 'block' : 'none';
+  }
+}
+
+function kirimWA(btn){
+  var card = btn.closest('.card');
+  var nama = card.querySelector('.nama-produk').innerText;
+
+  var nomor = "6281234567890"; // ganti
+  var pesan = "Halo kak, saya mau beli " + nama;
+
+  var url = "https://wa.me/" + nomor + "?text=" + encodeURIComponent(pesan);
+
+  window.open(url, '_blank');
+}
+function revealOnScroll(){
+  let elements = document.querySelectorAll('.anim');
+
+  elements.forEach(el => {
+    let posisi = el.getBoundingClientRect().top;
+    let tinggiLayar = window.innerHeight;
+
+    if(posisi < tinggiLayar - 100){
+      el.classList.add('show');
+    }
+  });
+}
+
+window.addEventListener('scroll', revealOnScroll);
+window.addEventListener('load', revealOnScroll);
+window.addEventListener("load", function(){
+  setTimeout(function(){
+
+    const skeleton = document.getElementById("skeletonLoading");
+    const produk = document.getElementById("produkAsli");
+
+    if (skeleton) skeleton.style.display = "none";
+    if (produk) produk.style.display = "grid";
+
+  }, 1200);
+});
+const infoBar = document.getElementById("infoBar");
+
+const messages = [
+  "🔥 Promo Service Laptop mulai 75rb! Hubungi sekarang juga 🔥",
+  "🕒 Senin - Sabtu: 08.00 - 17.00 | Minggu: Tutup",
+  "💻 Service cepat & bergaransi!",
+  "📍 Wiracom Banjarbaru siap bantu kamu 😁"
+];
+
+let index = 0;
+
+setInterval(() => {
+  // fade out
+  infoBar.style.opacity = 0;
+
+  setTimeout(() => {
+    index = (index + 1) % messages.length;
+    infoBar.innerHTML = messages[index];
+
+    // fade in
+    infoBar.style.opacity = 1;
+  }, 400);
+
+}, 3500);
+
+function chatRakit(jenis){
+  var nomor = "6281234567890"; // ganti nomor ayah kamu
+  var pesan = "Halo kak, saya mau konsultasi " + jenis;
+
+  var url = "https://wa.me/" + nomor + "?text=" + encodeURIComponent(pesan);
+
+  window.open(url, '_blank');
+}
+
+
+window.addEventListener("load", function () {
+
+  const el = document.getElementById("layananScroll");
+
+  // duplicate biar infinite
+  el.innerHTML += el.innerHTML;
+
+  let isDown = false;
+  let startX = 0;
+  let scrollStart = 0;
+
+  let velocity = 0;
+  let lastMove = 0;
+  let momentumID;
+
+  let autoSpeed = 0.4;
+  let autoRun = true;
+
+  // 🎯 AUTO SCROLL HALUS
+  function autoScroll() {
+    if (autoRun && !isDown) {
+      el.scrollLeft += autoSpeed;
+
+      if (el.scrollLeft >= el.scrollWidth / 2) {
+        el.scrollLeft = 0;
+      }
+    }
+    requestAnimationFrame(autoScroll);
+  }
+  autoScroll();
+
+  // 🎯 START DRAG
+  function startDrag(x) {
+    isDown = true;
+    autoRun = false;
+
+    startX = x;
+    scrollStart = el.scrollLeft;
+
+    velocity = 0;
+    lastMove = x;
+
+    cancelAnimationFrame(momentumID);
+  }
+
+  // 🎯 MOVE DRAG (SMOOTH VELOCITY)
+  function moveDrag(x) {
+    if (!isDown) return;
+
+    const dx = x - startX;
+
+    // smoothing velocity (ini kunci smooth)
+    velocity = (x - lastMove) * 0.8 + velocity * 0.2;
+    lastMove = x;
+
+    el.scrollLeft = scrollStart - dx;
+  }
+
+  // 🎯 END DRAG + MOMENTUM ULTRA SMOOTH
+  function endDrag() {
+    isDown = false;
+
+    function momentum() {
+      if (Math.abs(velocity) < 0.1) {
+        autoRun = true;
+        return;
+      }
+
+      el.scrollLeft -= velocity;
+
+      // friction super smooth
+      velocity *= 0.92;
+
+      momentumID = requestAnimationFrame(momentum);
+    }
+
+    momentum();
+  }
+
+  // 🖱 DESKTOP
+  el.addEventListener("mousedown", e => startDrag(e.pageX));
+  el.addEventListener("mousemove", e => moveDrag(e.pageX));
+  el.addEventListener("mouseup", endDrag);
+  el.addEventListener("mouseleave", endDrag);
+
+  // 📱 MOBILE
+  el.addEventListener("touchstart", e => startDrag(e.touches[0].pageX));
+  el.addEventListener("touchmove", e => moveDrag(e.touches[0].pageX));
+  el.addEventListener("touchend", endDrag);
+
+});
+const text = document.getElementById("marqueeText");
+
+if (text) {
+  let speed = 15;
+  text.style.animationDuration = speed + "s";
+}
+
+
+
+window.addEventListener("DOMContentLoaded", () => {
+  const buttons = document.querySelectorAll(".faq-question");
+
+  buttons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const answer = btn.nextElementSibling;
+      if (!answer) return;
+
+      const isOpen = answer.style.maxHeight && answer.style.maxHeight !== "0px";
+
+      if (isOpen) {
+        answer.style.maxHeight = "0px";
+        answer.style.padding = "0 12px";
+      } else {
+        answer.style.maxHeight = answer.scrollHeight + "px";
+        answer.style.padding = "10px 12px";
+      }
+    });
+  });
+});
+
+const backgrounds = [
+  "assets/bg/bg1.png",
+  "assets/bg/bg2.png",
+  "assets/bg/bg3.png",
+  "assets/bg/bg4.png"
+];
+
+let bgIndex = 0;
+
+function changeBackground() {
+  document.body.style.backgroundImage = `url('${backgrounds[bgIndex]}')`;
+
+  bgIndex = (bgIndex + 1) % backgrounds.length;
+}
+
+// pertama kali load
+changeBackground();
+
+// ganti tiap 1 detik
+setInterval(changeBackground, 5000);
+
+
+
+function chatLayanan(btn){
+  var nomor = "6282337354131";
+
+  // ambil card parent
+  var card = btn.closest('.card');
+
+  // ambil judul layanan dari h3
+  var namaLayanan = card.querySelector('h3').innerText;
+
+  var pesan = `Halo kak 👋
+Saya mau tanya tentang layanan *${namaLayanan}*.
+
+Boleh minta info:
+- Estimasi biaya 💰
+- Lama pengerjaan ⏱️
+- Apakah bisa ditunggu / harus tinggal
+
+Terima kasih 🙏`;
+
+  var url = "https://wa.me/" + nomor + "?text=" + encodeURIComponent(pesan);
+
+  window.open(url, '_blank');
+}
+const viewer = document.getElementById("imgViewer");
+const viewerImg = document.getElementById("viewerImg");
+const closeBtn = document.querySelector(".close-btn");
+
+// klik semua gambar di card
+document.querySelectorAll(".card img").forEach(img => {
+  img.addEventListener("click", () => {
+    viewer.style.display = "flex";
+    viewerImg.src = img.src;
+  });
+});
+
+// tutup
+closeBtn.onclick = () => viewer.style.display = "none";
+viewer.onclick = (e) => {
+  if(e.target === viewer){
+    viewer.style.display = "none";
+  }
+};
+const scrollBtn = document.getElementById("scrollBtn");
+
+window.addEventListener("scroll", () => {
+  const scrollPos = window.scrollY;
+  const pageHeight = document.body.scrollHeight - window.innerHeight;
+
+  // kalau sudah hampir bawah
+  if (scrollPos > pageHeight - 200) {
+    scrollBtn.innerHTML = "⬆";
+  } else {
+    scrollBtn.innerHTML = "⬇";
+  }
+});
+
+scrollBtn.addEventListener("click", () => {
+  const scrollPos = window.scrollY;
+  const pageHeight = document.body.scrollHeight - window.innerHeight;
+
+  if (scrollPos > pageHeight - 200) {
+    // kalau di bawah → ke atas
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  } else {
+    // kalau di atas → ke bawah
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: "smooth"
+    });
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
