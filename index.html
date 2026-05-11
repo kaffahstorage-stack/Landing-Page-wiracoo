@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wiracom Banjarbaru</title>
+  <title>WiraAudio Banjarbaru</title>
   <style>
     body {font-family: Arial, sans-serif;margin:0;background:#f5f7fb;color:#333}
     header {background:linear-gradient(135deg,#0f172a,#1e3a8a);color:white;padding:25px;text-align:center}
@@ -797,6 +797,30 @@ body::before {
 #scrollBtn:hover {
   transform: scale(1.1);
 }
+#scrollBtn:active {
+  transform: scale(0.9);
+}
+.video-box{
+  width:100%;
+  max-width:700px;
+  margin:20px auto;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 6px 20px rgba(0,0,0,0.25);
+  aspect-ratio:16/9;
+  background:#000;
+}
+
+.video-box iframe{
+  width:100%;
+  height:100%;
+  display:block;
+  border:none;
+}
+
+
+
+
 
 
 
@@ -807,11 +831,11 @@ body::before {
   <div id="welcomePopup">
   <div class="welcome-box">
     <h1>Selamat Datang 👋</h1>
-    <p>Di Wiracom Banjarbaru</p>
+    <p>Di Wira Audio Banjarbaru</p>
   </div>
 </div>
 </head>
-<a href="https://wa.me/6281234567890?text=Halo%20kak,%20saya%20butuh%20bantuan" 
+<a href="https://wa.me/6282337354131?text=Halo%20kak,%20saya%20butuh%20bantuan" 
    target="_blank" 
    class="wa-container">
 
@@ -831,289 +855,37 @@ body::before {
     <img src="assets/logo.png" alt="Logo Wiracom" class="logo">
     
     <div>
-      <h1>Wiracom Banjarbaru</h1>
-      <p>Spesialis Printer • Laptop • PC • Sound System</p>
+      <h1>Wira Audio Banjarbaru</h1>
+      <p>Ahlinya Sound System Masjid dan Mushala</p>
     </div>
   </div>
 </header>
 <div id="infoBar" style="background:#facc15;color:#000;padding:10px;text-align:center;font-weight:bold;transition:0.5s;">
-  🔥 Promo Service Laptop mulai 75rb! Hubungi sekarang juga 🔥
+  🔥 Free Cheking dan Tuning ruangan 🔥
 </div>
 
 
-<div class="container">
 
-  <div class="section-title">⭐ Kenapa Pilih Kami?</div>
-
-  <div class="grid">
-    <div class="card">
-      <h3>⚡ Cepat</h3>
-      <p>Pengerjaan cepat & aman 😁</p>
-    </div>
-
-    <div class="card">
-      <h3>💯 Berpengalaman</h3>
-      <p>Sudah ada sejak 2012</p>
-    </div>
-
-    <div class="card">
-      <h3>💬 Konsultasi Gratis</h3>
-      <p>Bisa tanya dulu tanpa biaya</p>
-    </div>
-	
-	<div class="card">
-      <h3>💯Berpengalaman dalam bidang Sound system</h3>
-      <p>Sudah menghandle lebih dari 5 masjid di Banjarbaru dan sekitarnya😁</p>
-    </div>
-	
-  </div>
 
 </div>
 
-  <div class="section-title">⚡ Ingin Merakit / membeli Sesuatu?</div>
-
-  <div class="grid-rakit">
-
-    <div class="card">
-      <h3>💻 Rakit PC</h3>
-      <p>Konsultasi & rakit PC sesuai kebutuhan</p>
-      <button class="btn-wa" onclick="chatRakit('Rakit PC')">
-        Chat WA
-      </button>
-    </div>
-
-    <div class="card">
-      <h3>🔊 Rakit Speaker</h3>
-      <p>Rakit speaker untuk rumah, masjid, dll</p>
-      <button class="btn-wa" onclick="chatRakit('Rakit Sound System')">
-        Chat WA
-      </button>
-    </div>
-	
-    <div class="card">
-      <h3>🔊 Rakit Mixer</h3>
-      <p>Rakit Mixer untuk rumah, masjid, dll</p>
-      <button class="btn-wa" onclick="chatRakit('Rakit PC')">
-        Chat WA
-      </button>
-    </div>
-	
-	<div class="card">
-      <h3>🔊 Rakit Amplifier / Ampli</h3>
-      <p>Rakit Amplifier / ampli untuk rumah, masjid, dll</p>
-      <button class="btn-wa" onclick="chatRakit('Rakit PC')">
-        Chat WA
-      </button>
-    </div>
-	
-	 <div class="card">
-      <h3>💻 Beli Laptop</h3>
-      <p>Konsultasi & beli laptop sesuai kebutuhan</p>
-      <button class="btn-wa" onclick="chatRakit('Rakit PC')">
-        Chat WA
-      </button>
-    </div>
-	
-	 <div class="card">
-      <h3>🔊 Beli Mixer</h3>
-      <p>Beli mixer sesuai kebutuhan</p>
-      <button class="btn-wa" onclick="chatRakit('Rakit PC')">
-        Chat WA
-      </button>
-    </div>
-	
-	<div class="card">
-      <h3>🔊 Beli Amplifier</h3>
-      <p>Beli amplifier sesuai kebutuhan</p>
-      <button class="btn-wa" onclick="chatRakit('Rakit PC')">
-        Chat WA
-      </button>
-    </div>
-	
-	
-	
-	
-	
-	
-	
-  </div>
-
+ 
+<div class="video-box">
+  <iframe
+    src="https://www.youtube.com/embed/L_II1YCYjjI?autoplay=1&mute=1&loop=1&playlist=L_II1YCYjjI"
+    title="YouTube video player"
+    frameborder="0"
+    allow="autoplay; encrypted-media; picture-in-picture"
+    allowfullscreen>
+  </iframe>
 </div>
 
-<div class="section-title">⚠️ Kerusakan yang Sering Terjadi</div>
 
-<div class="grid">
+ 
 
-  <div class="card">
-  <div class="badge">⚡ Sering</div>
-    <h3>💻 Laptop Lemot</h3>
-    <p>Penyebab: RAM kecil, HDD penuh / rusak, atau virus</p>
-    
-  </div>
+ 
 
-  <div class="card">
-  <div class="badge">⚡ Sering</div>
-    <h3>🖨️ Printer Tidak Keluar Tinta</h3>
-    <p>Biasanya karena tinta kering atau head mampet</p>
-    
-  </div>
 
-  <div class="card">
-  <div class="badge">⚡ Sering</div>
-    <h3>💻 Laptop Tidak Nyala</h3>
-    <p>Bisa karena IC power, baterai, atau charger rusak</p>
-    
-  </div>
-
-  <div class="card">
-  <div class="badge">⚡ Sering</div>
-    <h3>🖥️ PC Restart Sendiri</h3>
-    <p>Biasanya karena PSU lemah atau overheat</p>
-    
-  </div>
-
-  <div class="card">
-    <h3>🔊 Speaker Tidak Bunyi</h3>
-    <p>Masalah pada kabel, amplifier, atau speaker</p>
-    
-  </div>
-
-  <div class="card">
-    <h3>🌐 Wifi Tidak Tersambung</h3>
-    <p>Bisa dari driver, router, atau setting jaringan</p>
-    
-  </div>
-
-  <div class="card">
-    <h3>🔥 Laptop Panas Berlebih</h3>
-    <p>Biasanya kipas kotor atau thermal paste kering</p>
-    
-  </div>
-
-  <div class="card">
-    <h3>🖨️ Printer Error / Lampu Kedip</h3>
-    <p>Indikasi waste ink penuh atau error sistem</p>
-    
-  </div>
-  
-  <div class="card">
-  <div class="badge">⚡ Sering</div>
-    <h3>💻 Internet Lemot</h3>
-    <p>Bisa karena routernya kurang kencang dll </p>
-    
-  </div>
-
-</div>
-  
-
-  <div class="section-title">🛠️ Layanan Kami</div>
-
-<div class="layanan-grid">
-
-  <!-- ASLI -->
-  <div class="card">
-    <h3>Service Printer</h3>
-    <p>Perbaikan & maintenance semua jenis printer</p>
-    <button class="btn-wa" onclick="chatLayanan(this)">
-  Chat WA
-</button>
-  </div>
-
-  <div class="card">
-  <div class="badge">🔥 Paling Laris</div>
-
-  <h3>Service Laptop</h3>
-  <p> ganti hardware, perbaikan laptop</p>
- <button class="btn-wa" onclick="chatLayanan(this)">
-  Chat WA
-</button>
-</div>
-
-  <div class="card">
-  <div class="badge">🔥 Hot</div>
-  
-    <h3>Service PC</h3>
-    <p>Rakit PC, upgrade & perbaikan</p>
-    <button class="btn-wa" onclick="chatLayanan(this)">
-  Chat WA
-</button>
-  </div>
-
-  <div class="card">
-  
-  
-    <h3>Sound System</h3>
-    <p>Perbaikan speaker & amplifier</p>
-    <button class="btn-wa" onclick="chatLayanan(this)">
-  Chat WA
-</button>
-  </div>
-
-  <div class="card">
-    <h3>CCTV</h3>
-    <p>Pasang & perbaikan CCTV</p>
-    <button class="btn-wa" onclick="chatLayanan(this)">
-  Chat WA
-</button>
-  </div>
-
-  <div class="card">
-  <div class="badge">🔥 Paling Laris</div>
-  
-    <h3>Sound System Masjid</h3>
-    <p>Pasang & perbaikan speaker masjid</p>
-    <button class="btn-wa" onclick="chatLayanan(this)">
-  Chat WA
-</button>
-  </div>
-
-  <div class="card">
-  <div class="badge">🔥 Start From 100k</div>
-  
-    <h3>Pembuatan Website</h3>
-    <p>Pembuatan website berbasis JavaScript, CSS, HTML</p>
-    <button class="btn-wa" onclick="chatLayanan(this)">
-  Chat WA
-</button>
-  </div>
-
-  <div class="card">
-    <h3>Sewa Sound System</h3>
-    <p>Sewa sound system untuk acara & masjid</p>
-    <button class="btn-wa" onclick="chatLayanan(this)">
-  Chat WA
-</button>
-  </div>
-  
-  <div class="card">
-  <div class="badge">🔥 Paling Laris</div>
-
-  <h3>Install ulang</h3>
-  <p>Install ulang laptop dan PC </p>
-  <button class="btn-wa" onclick="chatLayanan(this)">
-  Chat WA
-</button>
-</div>
-
-<div class="card">
-  <div class="badge">🔥 Paling Laris</div>
-  
-    <h3>Meningkatkan Kecepatan internet</h3>
-    <p>meningkatkan kecepatan internet untuk kantor</p>
-    <button class="btn-wa" onclick="chatLayanan(this)">
-  Chat WA
-</button>
-  </div>
-  
-  <div class="card">
-  <div class="badge">🔥 Paling Laris</div>
-  
-    <h3>Pasang corong masjid / mushala</h3>
-    <p>memasang corong untuk masjid / mushala</p>
-    <button class="btn-wa" onclick="chatLayanan(this)">
-  Chat WA
-</button>
-  </div>
   
 
 
@@ -1121,7 +893,7 @@ body::before {
 </div>
   
   <div class="container">
-  <div class="section-title">📸 Dokumentasi Kegiatan ( Gambarnya bisa di klik 😁 )</div>
+  <div class="section-title">Kegiatan Kami</div>
 
   <div class="grid">
 
@@ -1130,7 +902,7 @@ body::before {
       <h3>Kajian UAS di Banjarbaru</h3>
       <p><small>2 Feb 2026</small></p>
       <p>
-        2 Feb 2026 Kajian UAS di Gunung Kupang Masjid Ponpes Nurul Azhar. Wira Audio Banjarbaru, untuk kedua kalinya di percaya meng handle acar pengajian UAS. Alhamdulillah TUAN Guru puas dengan Sound System kami.
+        2 Feb 2026 Kajian UAS di Gunung Kupang Masjid Ponpes Nurul Azhar. Wira Audio Banjarbaru, untuk kedua kalinya di percaya meng handle acara pengajian UAS. Alhamdulillah TUAN Guru puas dengan Sound System kami pasang di masjid beliau.
       </p>
      
 	  <a class="btn-wa" href="https://wa.me/6282337354131">
@@ -1143,15 +915,39 @@ body::before {
       <h3>Kajian Ustad Ridho Febri</h3>
       <p><small>29 April 2024</small></p>
       <p>
-        29 April 2024 Kajian Ustadz Ridho Febri di Masjid Arraudhah wiyata. Wira Audio Banjarbaru, Alhamdulillah TUAN Guru puas dengan Sound System kami.
+        29 April 2024 Kajian Ustadz Ridho Febri di Masjid Arraudhah wiyata. Untuk kedua kalinya beliau hadi di Masjid Arraudhah Wiyata Banarbaru, Alhamdulillah beliau sangat puas dengan hasil produksi sound system yang kami kerjakan
       </p>
-      <p>
-        Hasil suara jernih & menjangkau seluruh area masjid.
-      </p>
+
 	  <a class="btn-wa" href="https://wa.me/6282337354131">
   Tanya Layanan Ini
 </a>
     </div>
+	
+		
+
+    <div class="card">
+      <img src="assets/kegiatan/binuang.jpg" alt="Kajian UAS">
+      <h3>Maulid Habsyi di binuang</h3>
+      <p><small>12 May 2026</small></p>
+      <p>
+        2 Feb 2026 Maulid Habsyi di Majelis Binuang, menggunakan speaker JBL EON7 dan mixer MIDAS MR18, dengan system mixer digital sangat memudahkan kegiatan bermajelis, tidak perlu lagi membawa berbagai macam aksesoris audio seperti effek dan yang lainya
+      </p>
+     
+	  <a class="btn-wa" href="https://wa.me/6282337354131">
+  Tanya Layanan Ini
+</a>
+    </div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
     
 </div>
@@ -1186,26 +982,20 @@ body::before {
   <div class="faq">
 
     <div class="faq-item">
-      <button class="faq-question">Apakah bisa panggilan ke rumah?</button>
+      <button class="faq-question">Apakah bisa panggilan ke luar kota?</button>
       <div class="faq-answer">
         Bisa 😁 tergantung lokasi dan jenis service yang dibutuhkan.
       </div>
     </div>
 
     <div class="faq-item">
-      <button class="faq-question">Apakah ada garansi service?</button>
+      <button class="faq-question">Apakah ada layanan after sales?</button>
       <div class="faq-answer">
-        Ada untuk beberapa layanan seperti laptop, PC, dan printer.
+        Ada untuk beberapa layanan seperti Amplifier, mixer dan speaker.
       </div>
     </div>
 
-    <div class="faq-item">
-      <button class="faq-question">Bisa konsultasi dulu?</button>
-      <div class="faq-answer">
-        Bisa banget, konsultasi gratis tanpa biaya 😁
-      </div>
-    </div>
-
+ 
     <div class="faq-item">
       <button class="faq-question">Berapa lama proses service?</button>
       <div class="faq-answer">
@@ -1213,12 +1003,7 @@ body::before {
       </div>
     </div>
 	
-	<div class="faq-item">
-      <button class="faq-question">Apakah ada biaya checkin?</button>
-      <div class="faq-answer">
-        Ada kalau misalnya costumernya cancel 😁
-      </div>
-    </div>
+
 
   </div>
 </div>
@@ -1274,7 +1059,7 @@ function kirimWA(btn){
   var card = btn.closest('.card');
   var nama = card.querySelector('.nama-produk').innerText;
 
-  var nomor = "6281234567890"; // ganti
+  var nomor = "6282337354131"; // ganti
   var pesan = "Halo kak, saya mau beli " + nama;
 
   var url = "https://wa.me/" + nomor + "?text=" + encodeURIComponent(pesan);
@@ -1310,10 +1095,10 @@ window.addEventListener("load", function(){
 const infoBar = document.getElementById("infoBar");
 
 const messages = [
-  "🔥 Promo Service Laptop mulai 75rb! Hubungi sekarang juga 🔥",
-  "🕒 Senin - Sabtu: 08.00 - 17.00 | Minggu: Tutup",
-  "💻 Service cepat & bergaransi!",
-  "📍 Wiracom Banjarbaru siap bantu kamu 😁"
+  "🔥 Service Berbagai Macam Perangkat Audio 🔥",
+  "🕒 Workshoop Senin - Sabtu: 08.00 - 17.00 | Minggu: Tutup",
+  "💻 Utamakan Kejelasan dan Kenyamanan Jamaah",
+  "📍 Wira Audio Banjarbaru siap membantu kebutuhan sound system anda"
 ];
 
 let index = 0;
@@ -1333,7 +1118,7 @@ setInterval(() => {
 }, 3500);
 
 function chatRakit(jenis){
-  var nomor = "6281234567890"; // ganti nomor ayah kamu
+  var nomor = "6282337354131"; // ganti nomor ayah kamu
   var pesan = "Halo kak, saya mau konsultasi " + jenis;
 
   var url = "https://wa.me/" + nomor + "?text=" + encodeURIComponent(pesan);
@@ -1464,10 +1249,10 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 const backgrounds = [
-  "assets/bg/bg1.png",
-  "assets/bg/bg2.png",
-  "assets/bg/bg3.png",
-  "assets/bg/bg4.png"
+  "assets/bg/bekground1.png",
+  "assets/bg/bekground2.png",
+  "assets/bg/bekground3.png",
+  "assets/bg/bekground4.png"
 ];
 
 let bgIndex = 0;
@@ -1560,7 +1345,18 @@ scrollBtn.addEventListener("click", () => {
     });
   }
 });
+function chatRakitAuto(btn){
+  var nomor = "6282337354131";
 
+  var card = btn.closest('.card');
+  var nama = card.querySelector('h3').innerText;
+
+  var pesan = "Halo kak, saya mau konsultasi " + nama;
+
+  var url = "https://wa.me/" + nomor + "?text=" + encodeURIComponent(pesan);
+
+  window.open(url, '_blank');
+}
 
 
 
