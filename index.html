@@ -3,1374 +3,2710 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WiraAudio Banjarbaru</title>
+  <title>Wira Audio Banjarbaru</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
-    body {font-family: Arial, sans-serif;margin:0;background:#f5f7fb;color:#333}
-    header {background:linear-gradient(135deg,#0f172a,#1e3a8a);color:white;padding:25px;text-align:center}
-    header h1{margin:0;font-size:26px}
-    header p{margin:5px 0 0;font-size:14px;opacity:0.9}
-    .container{padding:20px;max-width:1100px;margin:auto}
-    .section-title{margin:30px 0 10px;font-size:22px;font-weight:bold}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
-    .card{background:white;padding:15px;border-radius:14px;box-shadow:0 4px 12px rgba(0,0,0,0.08);transition:0.2s}
-    .card:hover{transform:translateY(-3px)}
-    .card img{width:100%;border-radius:10px;height:140px;object-fit:cover}
-    .price{color:#16a34a;font-weight:bold;margin:5px 0}
-    .btn-wa{display:inline-block;margin-top:10px;padding:8px 12px;background:#25D366;color:white;text-decoration:none;border-radius:8px;font-size:14px}
-    .btn-call{display:inline-block;margin-top:10px;padding:8px 12px;background:#2563eb;color:white;text-decoration:none;border-radius:8px;font-size:14px}
-    .map{margin-top:20px;border-radius:12px;overflow:hidden}
-    .testimoni{background:white;padding:15px;border-radius:12px;margin-top:10px;box-shadow:0 2px 8px rgba(0,0,0,0.08)}
-    .stars{color:gold}
-    footer{text-align:center;padding:20px;font-size:14px;color:#666}
-	.map iframe {
-  width: 100%;
-  height: 350px;
-  border-radius: 12px;
-}
-/* animasi awal (sembunyi dulu) */
-.anim {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s ease;
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
 
-/* saat muncul */
-.anim.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-/* shimmer effect */
-@keyframes shimmer {
-  0% {background-position: -400px 0;}
-  100% {background-position: 400px 0;}
-}
+    :root {
+      --bg: #f5f9ff;
+      --bg2: #ffffff;
+      --text: #0f172a;
+      --soft: #64748b;
+      --primary: #6d5dfc;
+      --secondary: #32d6ff;
+      --glass: rgba(255,255,255,0.75);
+      --border: rgba(15,23,42,0.08);
+      --shadow: 0 20px 60px rgba(109,93,252,0.12);
+    }
 
-.skeleton {
-  background: #e5e7eb;
-  background-image: linear-gradient(
-    90deg,
-    #e5e7eb 0px,
-    #f3f4f6 40px,
-    #e5e7eb 80px
-  );
-  background-size: 600px;
-  animation: shimmer 1.2s infinite linear;
-  border-radius: 8px;
-}
+    *::selection {
+      background: rgba(109,93,252,0.2);
+    }
 
-/* ukuran skeleton */
-.skel-title {height: 20px; width: 70%; margin-bottom: 10px;}
-.skel-text {height: 15px; width: 100%; margin-bottom: 6px;}
-.skel-btn {height: 30px; width: 80px; margin-top: 10px;}
-	
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 15px;
-  align-items: stretch;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-.card {
+    body {
+      background: linear-gradient(180deg, #f8fbff 0%, #eef6ff 100%);
+      color: var(--text);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      width: 650px;
+      height: 650px;
+      background: radial-gradient(circle, rgba(109,93,252,0.18), transparent 70%);
+      top: -250px;
+      left: -200px;
+      z-index: -3;
+      animation: float1 9s ease-in-out infinite;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(50,214,255,0.16), transparent 70%);
+      bottom: -220px;
+      right: -180px;
+      z-index: -3;
+      animation: float2 11s ease-in-out infinite;
+    }
+
+    @keyframes float1 {
+      0%,100% { transform: translateY(0px); }
+      50% { transform: translateY(40px); }
+    }
+
+    @keyframes float2 {
+      0%,100% { transform: translateY(0px); }
+      50% { transform: translateY(-35px); }
+    }
+
+    .grid-bg {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(15,23,42,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15,23,42,0.03) 1px, transparent 1px);
+      background-size: 35px 35px;
+      z-index: -4;
+      opacity: 0.6;
+    }
+
+   header {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: calc(100% - 120px);
+  max-width: 1250px;
+
+  padding: 16px 30px;
+
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
-}	
-	.card .btn-wa {
-  margin-top: 10px;
-}
-	#infoBar {
-  letter-spacing: 0.5px;
-}
-.wa-float {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #25D366;
-  color: white;
-  font-size: 24px;
-  padding: 12px 16px;
-  border-radius: 50%;
-  text-decoration: none;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  align-items: center;
+
+  background: rgba(255, 255, 255, 0.55);
+
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+
+  border: 1px solid rgba(255,255,255,0.7);
+
+  border-radius: 999px;
+
+  box-shadow:
+    0 10px 40px rgba(109,93,252,0.10),
+    0 4px 18px rgba(50,214,255,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+
   z-index: 999;
-  transition: 0.3s;
+  transition: 0.4s ease;
+}
+header.scrolled {
+  padding: 13px 28px;
+
+  background: rgba(255,255,255,0.75);
+
+  box-shadow:
+    0 12px 45px rgba(109,93,252,0.15),
+    0 5px 20px rgba(50,214,255,0.10);
 }
 
-.wa-float:hover {
-  transform: scale(1.1);
-}	
-	@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
-}
+    .logo {
+      font-size: 1.7rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-.wa-float {
-  animation: pulse 2s infinite;
-}
-	.wa-container {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
+nav {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
+}
+
+nav a {
   text-decoration: none;
-  z-index: 999;
-}
+  color: #64748b;
 
-/* bubble text */
-.wa-text {
-  background: white;
-  color: #333;
-  padding: 8px 12px;
-  border-radius: 20px;
-  font-size: 13px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  opacity: 0;
-  transform: translateX(20px);
-  transition: 0.3s;
-}
+  font-weight: 600;
 
-/* icon WA */
-.wa-icon {
-  background: #25D366;
-  padding: 12px;
-  border-radius: 50%;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  transition: 0.3s;
-}
+  padding: 12px 18px;
 
-/* hover effect */
-.wa-container:hover .wa-text {
-  opacity: 1;
-  transform: translateX(0);
-}
+  border-radius: 999px;
 
-.wa-container:hover .wa-icon {
-  transform: scale(1.1);
-}
+  transition: 0.35s ease;
 
-/* animasi muncul */
-@keyframes floatUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.wa-container {
-  animation: floatUp 0.6s ease;
-}
-	.section-title {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-	.btn-group {
-  display: flex;
-  gap: 6px;
-  margin-top: 10px;
-}
-
-
-
-.remove-btn {
-  background: red;
-  color: white;
-  border: none;
-  font-size: 12px;
-  padding: 3px 6px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.cart-footer {
-  border-top: 1px solid #ddd;
-  padding-top: 8px;
-  font-size: 13px;
-  text-align: right;
-}
-
-@keyframes fadeIn {
-  from {opacity:0; transform:translateY(-10px);}
-  to {opacity:1; transform:translateY(0);}
-}
-	#cart-items li {
-  background: #f3f4f6;
-  padding: 8px;
-  border-radius: 8px;
-  margin-bottom: 6px;
-  font-size: 13px;
-}
-
-.qty-control {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  margin-top: 5px;
-}
-
-.qty-control button {
-  background: #2563eb;
-  color: white;
-  border: none;
-  padding: 2px 6px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.remove-btn {
-  background: red;
-  color: white;
-  border: none;
-  font-size: 11px;
-  padding: 3px 6px;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-top: 5px;
-}
-
-.checkout-btn {
-  margin-top: 10px;
-  width: 100%;
-  padding: 8px;
-  background: #25D366;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
-	.cart-item-top {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.cart-item-top input {
-  transform: scale(1.2);
-}
-	#checkout-btn {
-  display: none;
-}
-	
-
-.btn-wa:hover {
-  background: #16a34a;
-  transform: scale(1.03);
-}
-	.btn-group .btn-wa {
-  flex:1;
-}
-	.cart-popup {
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: 0.2s;
-}
-	.cart-popup {
-  position: fixed;
-  top: 80px;
-  right: 20px;
-  background: white;
-  padding: 15px;
-  border-radius: 16px;
-  width: 280px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-  display: none;
-
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: 0.2s;
-}
-	#cart-items li {
-  background: #f9fafb;
-  padding: 10px;
-  border-radius: 10px;
-  margin-bottom: 8px;
-  font-size: 13px;
-  border: 1px solid #eee;
-  transition: 0.2s;
-}
-
-#cart-items li:hover {
-  background: #f3f4f6;
-}
-
-.cart-item-name {
-  font-weight: bold;
-  font-size: 13px;
-}
-
-.cart-price {
-  font-size: 12px;
-  color: #666;
-}
-
-.qty-control {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 6px;
-}
-
-.qty-control button {
-  background: #2563eb;
-  color: white;
-  border: none;
-  padding: 3px 8px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.remove-btn {
-  background: #ef4444;
-  color: white;
-  border: none;
-  font-size: 11px;
-  padding: 3px 8px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-	.grid-rakit {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 300px));
-  justify-content: center; /* ini kunci biar gak melebar */
-  gap: 15px;
-}
-	.scroll-wrapper {
   position: relative;
 }
 
-.layanan-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 15px;
-}
-/* biar gak ada scrollbar jelek */
-.scroll-container::-webkit-scrollbar {
-  display: none;
+nav a:hover {
+  color: #111827;
+
+  background: rgba(109,93,252,0.08);
+
+  transform: translateY(-2px);
 }
 
-.scroll-container .card {
-  min-width: 250px;
-}
+    .btn {
+      padding: 14px 24px;
+      border-radius: 18px;
+      border: none;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.35s;
+      box-shadow: 0 15px 40px rgba(109,93,252,0.22);
+    }
 
-/* tombol panah */
-.scroll-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: #1e3a8a;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 10;
-  opacity: 0.8;
-}
+    .btn:hover {
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 25px 55px rgba(109,93,252,0.3);
+    }
 
-.scroll-btn:hover {
-  opacity: 1;
-}
-
-.scroll-btn.left {
-  left: -10px;
-}
-
-.scroll-btn.right {
-  right: -10px;
-}
-	.scroll-container {
+   .hero {
+  min-height: 100vh;
   display: flex;
-  overflow-x: auto;
-  gap: 15px;
-  padding: 10px 5px;
-  scroll-behavior: smooth;
-
- 
-  -webkit-overflow-scrolling: touch;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  padding: 80px 7%;
+  padding-top: 140px;
+  flex-wrap: wrap;
+  position: relative;
 }
 
-.scroll-container::-webkit-scrollbar {
-  display: none;
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(255,255,255,0.9), transparent 70%);
+      right: 10%;
+      top: 10%;
+      z-index: -1;
+    }
+
+    .hero-text {
+      flex: 1;
+      min-width: 320px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.8);
+      border: 1px solid rgba(15,23,42,0.06);
+      margin-bottom: 28px;
+      color: var(--soft);
+      font-weight: 600;
+      box-shadow: var(--shadow);
+    }
+
+    .hero h1 {
+      font-size: 4.8rem;
+      line-height: 1.05;
+      margin-bottom: 24px;
+      letter-spacing: -2px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      color: var(--soft);
+      font-size: 1.12rem;
+      line-height: 1.9;
+      max-width: 680px;
+      margin-bottom: 35px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.8);
+      color: var(--text);
+      border: 1px solid rgba(15,23,42,0.08);
+      box-shadow: none;
+    }
+
+    .btn-secondary:hover {
+      background: white;
+    }
+
+    .hero-card {
+      flex: 1;
+      min-width: 320px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .audio-box {
+      width: 100%;
+      max-width: 520px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(255,255,255,0.7);
+      border-radius: 40px;
+      padding: 40px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 30px 90px rgba(109,93,252,0.18);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .audio-box::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(109,93,252,0.08), rgba(50,214,255,0.08));
+    }
+
+    .audio-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .speaker {
+      width: 240px;
+      height: 240px;
+      margin: auto;
+      border-radius: 50%;
+      background: radial-gradient(circle at center, #dbeafe 0%, #c7d2fe 30%, #94a3b8 70%, #475569 100%);
+      position: relative;
+      animation: pulse 2.5s infinite ease-in-out;
+      box-shadow: 0 0 60px rgba(50,214,255,0.25);
+    }
+
+    .speaker::before {
+      content: "";
+      position: absolute;
+      inset: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+    }
+
+    .speaker::after {
+      content: "";
+      position: absolute;
+      inset: 80px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #1e293b, #0f172a);
+    }
+
+    @keyframes pulse {
+      0%,100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .wave {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 10px;
+      height: 90px;
+      margin-top: 45px;
+    }
+
+    .wave span {
+      width: 12px;
+      border-radius: 999px;
+      background: linear-gradient(to top, var(--primary), var(--secondary));
+      animation: wave 1.1s infinite ease-in-out;
+      box-shadow: 0 0 12px rgba(50,214,255,0.3);
+    }
+
+    .wave span:nth-child(1){height:22px;animation-delay:0s;}
+    .wave span:nth-child(2){height:55px;animation-delay:0.2s;}
+    .wave span:nth-child(3){height:75px;animation-delay:0.4s;}
+    .wave span:nth-child(4){height:48px;animation-delay:0.6s;}
+    .wave span:nth-child(5){height:68px;animation-delay:0.8s;}
+    .wave span:nth-child(6){height:30px;animation-delay:1s;}
+
+    @keyframes wave {
+      0%,100% { transform: scaleY(1); }
+      50% { transform: scaleY(1.7); }
+    }
+
+    section {
+      padding: 110px 7%;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 70px;
+    }
+
+    .section-title h2 {
+      font-size: 3.2rem;
+      margin-bottom: 16px;
+      letter-spacing: -1px;
+    }
+
+    .section-title p {
+      max-width: 700px;
+      margin: auto;
+      color: var(--soft);
+      line-height: 1.9;
+    }
+
+    .services,
+    .stats,
+    .gallery {
+      display: grid;
+      gap: 25px;
+    }
+
+    .services {
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .service-card,
+    .stat-box,
+    .gallery-card {
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(255,255,255,0.8);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+    }
+
+    .service-card {
+      border-radius: 30px;
+      padding: 35px;
+      transition: 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      background: rgba(109,93,252,0.08);
+      border-radius: 50%;
+      top: -60px;
+      right: -60px;
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px) rotate(-1deg);
+    }
+
+    .icon {
+      font-size: 2.7rem;
+      margin-bottom: 20px;
+    }
+
+    .service-card h3 {
+      margin-bottom: 14px;
+      font-size: 1.35rem;
+    }
+
+    .service-card p {
+      color: var(--soft);
+      line-height: 1.8;
+    }
+
+    .stats {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      margin-top: 60px;
+    }
+
+    .stat-box {
+      padding: 38px;
+      border-radius: 28px;
+      text-align: center;
+    }
+
+    .stat-box h3 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .gallery {
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .gallery-card {
+      border-radius: 32px;
+      overflow: hidden;
+      height: 300px;
+      position: relative;
+    }
+
+    .gallery-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(15,23,42,0.85), transparent);
+      z-index: 1;
+    }
+
+    .gallery-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.5s;
+    }
+
+    .gallery-card:hover img {
+      transform: scale(1.08);
+    }
+
+    .gallery-info {
+      position: absolute;
+      bottom: 22px;
+      left: 22px;
+      z-index: 2;
+      color: white;
+    }
+
+    .gallery-info p {
+      opacity: 0.85;
+      font-size: 0.95rem;
+    }
+
+    .cta {
+      text-align: center;
+      padding-top: 20px;
+    }
+
+    .cta-box {
+      padding: 80px 40px;
+      border-radius: 40px;
+      background: linear-gradient(135deg, rgba(109,93,252,0.12), rgba(50,214,255,0.12));
+      border: 1px solid rgba(255,255,255,0.8);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+    }
+
+    .cta-box h2 {
+      font-size: 3.2rem;
+      margin-bottom: 18px;
+    }
+
+    .cta-box p {
+      max-width: 720px;
+      margin: auto;
+      color: var(--soft);
+      line-height: 1.9;
+      margin-bottom: 35px;
+    }
+
+    footer {
+      margin-top: 80px;
+      padding: 40px 7%;
+      border-top: 1px solid rgba(15,23,42,0.06);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      color: var(--soft);
+    }
+
+    .socials {
+      display: flex;
+      gap: 14px;
+    }
+
+    .socials a {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: 0.35s;
+      box-shadow: var(--shadow);
+    }
+
+    .socials a:hover {
+      transform: translateY(-5px) rotate(6deg);
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+    }
+
+    @media (max-width: 900px) {
+      nav {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: 3.4rem;
+      }
+
+      .section-title h2,
+      .cta-box h2 {
+        font-size: 2.5rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+  padding-top: 170px;
 }
 
-.scroll-container .card {
-  min-width: 250px;
-  scroll-snap-align: start;
+.hero h1 {
+  margin-top: 10px;
+  font-size: 2.4rem;
+  line-height: 1.1;
 }
-	.scroll-container {
-  cursor: grab;
-}
+      .hero {
+        padding-top: 50px;
+      }
 
-.scroll-container:active {
-  cursor: grabbing;
-}
-	.scroll-container {
-  user-select: none;
-}
-	.scroll-container {
-  scroll-snap-type: x mandatory;
-}
-	#welcomePopup {
+      .hero h1 {
+        font-size: 2.7rem;
+      }
+
+      .section-title h2,
+      .cta-box h2 {
+        font-size: 2rem;
+      }
+
+      .speaker {
+        width: 190px;
+        height: 190px;
+      }
+    }
+.modal {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.6);
+
+  background: rgba(15,23,42,0.65);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition: 0.35s ease;
+
+  z-index: 2000;
+
+  padding: 20px;
+}
+
+.modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  width: 100%;
+  max-width: 700px;
+
+  background: rgba(255,255,255,0.92);
+
+  backdrop-filter: blur(20px);
+
+  border-radius: 35px;
+
+  padding: 25px;
+
+  position: relative;
+
+  animation: popup 0.35s ease;
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,0.2);
+}
+
+@keyframes popup {
+  from {
+    transform: scale(0.8) translateY(40px);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-content img {
+  width: 100%;
+
+  max-height: 80vh;
+
+  object-fit: contain;
+
+  border-radius: 24px;
+
+  margin-bottom: 25px;
+
+  background: #edf4ff;
+
+  transition: 0.4s ease;
+}
+
+.modal-content h2 {
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+
+.modal-content p {
+  color: #64748b;
+  line-height: 1.8;
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+
+  font-size: 2rem;
+
+  cursor: pointer;
+
+  color: #111827;
+}
+
+.gallery-card {
+  cursor: pointer;
+}
+.featured-video {
+  padding:
+    150px 7% 80px;
+}
+
+.featured-video-box {
+  background:
+    rgba(255,255,255,0.72);
+
+  border:
+    1px solid rgba(255,255,255,0.8);
+
+  backdrop-filter:
+    blur(20px);
+
+  border-radius: 40px;
+
+  padding: 40px;
+
+  display: grid;
+
+  grid-template-columns:
+    1fr 1.2fr;
+
+  gap: 40px;
+
+  align-items: center;
+
+  box-shadow:
+    0 25px 70px rgba(109,93,252,0.12);
+
+  overflow: hidden;
+
+  position: relative;
+}
+
+.featured-video-box::before {
+  content: "";
+
+  position: absolute;
+
+  width: 400px;
+  height: 400px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(109,93,252,0.15),
+      transparent 70%
+    );
+
+  top: -150px;
+  right: -120px;
+}
+
+.featured-text {
+  position: relative;
+  z-index: 2;
+}
+
+.video-tag {
+  display: inline-block;
+
+  padding: 10px 18px;
+
+  border-radius: 999px;
+
+  background:
+    rgba(109,93,252,0.08);
+
+  color: #6d5dfc;
+
+  font-weight: 600;
+
+  margin-bottom: 22px;
+}
+
+.featured-text h1 {
+  font-size: 3.5rem;
+
+  line-height: 1.1;
+
+  margin-bottom: 20px;
+
+  letter-spacing: -2px;
+}
+
+.featured-text p {
+  color: #64748b;
+
+  line-height: 1.9;
+
+  font-size: 1.05rem;
+}
+
+.featured-player {
+  position: relative;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.18);
+  transform: translateZ(0);
+}
+
+/* bikin aspect ratio biar gak gepeng / aneh */
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 */
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 28px;
+  transition: 0.4s ease;
+}
+
+/* hover biar hidup */
+.featured-player:hover iframe {
+  transform: scale(1.02);
+}
+
+@media(max-width: 900px){
+
+  .dynamic-island {
+
+    width: 150px;
+    height: 56px;
+
+    padding: 0 18px;
+
+    top: 14px;
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(0,40,40,0.95),
+        rgba(0,80,70,0.9)
+      );
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    box-shadow:
+      0 10px 35px rgba(0,255,170,0.18),
+      inset 0 1px 0 rgba(255,255,255,0.08);
+
+    backdrop-filter: blur(18px);
+
+    justify-content: space-between;
+  }
+
+  .island-logo {
+
+    font-size: 1.1rem;
+
+    color: white;
+
+    background: none;
+    -webkit-text-fill-color: white;
+  }
+
+  .island-nav,
+  .island-btn {
+
+    display: none;
+  }
+
+  .island-toggle {
+
+    display: flex;
+  }
+
+}
+
+  .featured-video-box {
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+
+  border-radius: 45px;
+  padding: 45px;
+
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 45px;
+  align-items: center;
+
+  position: relative;
+  overflow: hidden;
+
+  box-shadow:
+    0 30px 90px rgba(0, 0, 0, 0.12),
+    0 10px 40px rgba(109, 93, 252, 0.12);
+
+  transition: 0.4s ease;
+}
+
+/* glow background biar hidup */
+.featured-video-box::before {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle,
+    rgba(109,93,252,0.18),
+    transparent 65%
+  );
+  top: -180px;
+  right: -160px;
+  z-index: 0;
+}
+
+/* hover effect biar terasa premium */
+.featured-video-box:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 40px 110px rgba(0, 0, 0, 0.18),
+    0 15px 60px rgba(50, 214, 255, 0.15);
+}
+
+.featured-text {
+  position: relative;
+  z-index: 2;
+}
+
+.featured-text h1 {
+  font-size: 3.3rem;
+  line-height: 1.1;
+  margin-bottom: 18px;
+  letter-spacing: -1.5px;
+}
+
+.featured-text p {
+  color: #64748b;
+  line-height: 1.9;
+  font-size: 1.05rem;
+}
+
+/* VIDEO CARD UPGRADE */
+.featured-player {
+  position: relative;
+  border-radius: 30px;
+  overflow: hidden;
+
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.25);
+
+  transform: translateZ(0);
+  transition: 0.4s ease;
+}
+
+/* hover zoom halus */
+.featured-player:hover {
+  transform: scale(1.02);
+}
+
+/* wrapper biar tetap rapi */
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+}
+
+/* iframe lebih soft & modern */
+.video-wrapper iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+
+  border: none;
+  border-radius: 30px;
+
+  filter: contrast(1.05) saturate(1.1);
+
+  transition: 0.4s ease;
+}
+
+
+.floating-wa {
+  position: fixed;
+
+  right: 25px;
+  bottom: 25px;
+
+  width: 68px;
+  height: 68px;
+
+  border-radius: 50%;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
+  text-decoration: none;
+
+  font-size: 2rem;
+
+  background:
+    linear-gradient(
+      135deg,
+      #25D366,
+      #1ebe5d
+    );
+
+  color: white;
+
+  box-shadow:
+    0 15px 40px rgba(37,211,102,0.35);
+
+  z-index: 3000;
+
+  animation: waFloat 1.5s infinite ease-in-out;
+
+  transition: 0.35s ease;
+}
+
+.floating-wa:hover {
+  transform:
+    translateY(-8px)
+    scale(1.08);
+
+  box-shadow:
+    0 20px 50px rgba(37,211,102,0.45);
+}
+
+@keyframes waFloat {
+
+  0%,100%{
+    transform: translateY(0px);
+  }
+
+  50%{
+    transform: translateY(-10px);
+  }
+
+}
+.floating-wa img {
+  width: 34px;
+  height: 34px;
+
+  object-fit: contain;
+}
+
+.maps-section {
+  padding: 40px 7% 100px;
+}
+
+.maps-box {
+  width: 100%;
+
+  overflow: hidden;
+
+  border-radius: 35px;
+
+  background:
+    rgba(255,255,255,0.75);
+
+  border:
+    1px solid rgba(255,255,255,0.8);
+
+  backdrop-filter:
+    blur(20px);
+
+  box-shadow:
+    0 25px 70px rgba(109,93,252,0.12);
+
+  padding: 15px;
+}
+
+.maps-box iframe {
+  width: 100%;
+
+  height: 500px;
+
+  border: none;
+
+  border-radius: 25px;
+}
+.socials img {
+  width: 24px;
+  height: 24px;
+
+  object-fit: contain;
+}
+#loader {
+  position: fixed;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f8fbff,
+      #eef6ff
+    );
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   z-index: 99999;
 
-  opacity: 1;
-  animation: fadeOut 0.8s ease forwards;
-  animation-delay: 1.5s;
+  transition:
+    opacity 0.8s ease,
+    visibility 0.8s ease;
 }
 
-.welcome-box {
-  background: white;
-  padding: 25px 40px;
-  border-radius: 16px;
+#loader.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader-content {
   text-align: center;
-  transform: scale(0.7);
-  animation: popIn 0.5s ease forwards;
 }
 
-.welcome-box h1 {
-  margin: 0;
-  color: #0f172a;
-  font-size: 24px;
-}
+.loader-logo {
+  font-size: 4rem;
+  font-weight: 800;
 
-.welcome-box p {
-  margin-top: 8px;
-  color: #64748b;
-}
+  margin-bottom: 30px;
 
-/* animasi masuk */
-@keyframes popIn {
-  to {
-    transform: scale(1);
-  }
-}
+  background:
+    linear-gradient(
+      135deg,
+      #6d5dfc,
+      #32d6ff
+    );
 
-/* animasi hilang */
-@keyframes fadeOut {
-  to {
-    opacity: 0;
-    visibility: hidden;
-  }
-}
-	.running-text {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: #0f172a;
-  color: white;
-  overflow: hidden;
-  z-index: 9999;
-  border-top: 2px solid #1e3a8a;
-}
-
-.running-track {
-  display: flex;
-  white-space: nowrap;
-  width: fit-content;
-  animation: scrollText 15s linear infinite;
-}
-
-.running-track span {
-  padding-left: 100%;
-  font-size: 14px;
-  letter-spacing: 1px;
-}
-
-/* animasi jalan */
-@keyframes scrollText {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-	.marquee-wrapper {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background: #0b1220;
-  padding: 8px 10px;
-  z-index: 9999;
-  border-top: 2px solid #1e3a8a;
-}
-
-/* slider speed */
-#speedSlider {
-  width: 150px;
-  margin-bottom: 5px;
-}
-
-/* marquee area */
-.marquee {
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-/* teks jalan */
-#marqueeText {
-  display: inline-block;
-  padding-left: 100%;
-  font-size: 14px;
-  font-weight: bold;
-
-  /* 🔥 gradient text */
-  background: linear-gradient(90deg,#22c55e,#3b82f6,#a855f7,#22c55e);
-  background-size: 300%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
-  /* ✨ glow effect */
-  filter: drop-shadow(0 0 6px rgba(34,197,94,0.6));
-
-  animation: moveText 15s linear infinite, glowMove 3s ease infinite;
+  animation:
+    glowText 2s infinite alternate;
 }
 
-/* jalan kiri */
-@keyframes moveText {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
+@keyframes glowText {
+
+  from {
+    filter:
+      drop-shadow(0 0 10px rgba(109,93,252,0.2));
+  }
+
+  to {
+    filter:
+      drop-shadow(0 0 30px rgba(50,214,255,0.5));
+  }
+
 }
 
-/* gradient gerak */
-@keyframes glowMove {
-  0% { background-position: 0% }
-  100% { background-position: 300% }
-}
-	
-	footer {
-  position: relative;
-  z-index: 1;
-  background: #f5f7fb;
-}
-.footer-info {
-  background: #0f172a;
-  color: white;
-  padding: 30px 20px;
+.loader-wave {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  gap: 10px;
+
+  height: 80px;
+
+  margin-bottom: 20px;
 }
 
-.footer-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  max-width: 1100px;
+.loader-wave span {
+  width: 10px;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      to top,
+      #6d5dfc,
+      #32d6ff
+    );
+
+  animation:
+    loaderWave 1s infinite ease-in-out;
+}
+
+.loader-wave span:nth-child(1){
+  height: 20px;
+}
+
+.loader-wave span:nth-child(2){
+  height: 55px;
+  animation-delay: 0.1s;
+}
+
+.loader-wave span:nth-child(3){
+  height: 75px;
+  animation-delay: 0.2s;
+}
+
+.loader-wave span:nth-child(4){
+  height: 45px;
+  animation-delay: 0.3s;
+}
+
+.loader-wave span:nth-child(5){
+  height: 25px;
+  animation-delay: 0.4s;
+}
+
+@keyframes loaderWave {
+
+  0%,100%{
+    transform: scaleY(1);
+  }
+
+  50%{
+    transform: scaleY(1.7);
+  }
+
+}
+
+
+.cursor {
+  width: 18px;
+  height: 18px;
+
+  border-radius: 50%;
+
+  background: #6d5dfc;
+
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  pointer-events: none;
+
+  transform:
+    translate(-50%, -50%);
+
+  z-index: 999999;
+
+  transition:
+    transform 0.08s linear;
+}
+
+.cursor-blur {
+  width: 320px;
+  height: 320px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(109,93,252,0.18),
+      transparent 70%
+    );
+
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  pointer-events: none;
+
+  transform:
+    translate(-50%, -50%);
+
+  z-index: 0;
+
+  transition:
+    transform 0.15s linear;
+
+  filter:
+    blur(25px);
+}
+.faq-section {
+  padding: 80px 7%;
+}
+
+.faq-container {
+  max-width: 900px;
   margin: auto;
-}
 
-.footer-box h3 {
-  margin-bottom: 10px;
-  color: #60a5fa;
-}
-
-.footer-box p {
-  font-size: 14px;
-  margin: 5px 0;
-  opacity: 0.9;
-}
-
-/* biar footer lama tetap rapi */
-footer {
-  background: #020617;
-  color: #aaa;
-}
-.faq {
-  margin-top: 10px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 20px;
 }
 
 .faq-item {
-  background: #111827;
-  border-radius: 10px;
+  background:
+    rgba(255,255,255,0.72);
+
+  border:
+    1px solid rgba(255,255,255,0.8);
+
+  backdrop-filter:
+    blur(20px);
+
+  border-radius: 28px;
+
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.1);
+
+  box-shadow:
+    0 20px 60px rgba(109,93,252,0.10);
+
+  transition: 0.35s ease;
+}
+
+.faq-item:hover {
+  transform: translateY(-4px);
 }
 
 .faq-question {
   width: 100%;
-  text-align: left;
-  padding: 10px 12px;
-  background: #1f2937;
-  color: white;
+
+  padding: 28px;
+
   border: none;
-  cursor: pointer;
-  font-size: 14px;
-  transition: 0.2s;
-}
 
-.faq-question:hover {
-  background: #374151;
-}
+  background: transparent;
 
-.faq-answer {
-  max-height: 0;
-  overflow: hidden;
-  padding: 0 12px;
-  font-size: 13px;
-  color: #d1d5db;
-  transition: max-height 0.3s ease, padding 0.3s ease;
-}
-.faq-answer {
-  max-height: 0;
-  overflow: hidden;
-  padding: 0 12px;
-  transition: max-height 0.3s ease, padding 0.3s ease;
-}
-.card {
-  position: relative; /* penting biar badge nempel di card */
-}
-
-.badge {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background: #ef4444;
-  color: white;
-  font-size: 11px;
-  padding: 4px 8px;
-  border-radius: 999px;
-  font-weight: bold;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-}
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  color: #fff;
-
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  transition: background-image 1s ease-in-out;
-}
-
-/* overlay biar teks kebaca */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.5); /* gelap transparan */
-  z-index: -1;
-}
-
-/* biar card tetap putih jelas */
-.card, .footer-info, footer, .map, .container {
-  position: relative;
-  z-index: 1;
-}
-.card {
-  color: #333;
-}
-.header-content {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  gap: 15px;
+
+  font-size: 1.1rem;
+  font-weight: 600;
+
+  color: #0f172a;
+
+  cursor: pointer;
 }
 
-.logo {
-  width: 50px;
-  height: 50px;
+.faq-question span {
+  font-size: 1.5rem;
+
+  transition: 0.3s ease;
+}
+
+.faq-answer {
+  max-height: 0;
+
+  overflow: hidden;
+
+  transition:
+    max-height 0.4s ease,
+    padding 0.4s ease;
+
+  padding: 0 28px;
+
+  color: #64748b;
+
+  line-height: 1.9;
+}
+
+.faq-item.active .faq-answer {
+  max-height: 300px;
+
+  padding:
+    0 28px 28px;
+}
+
+.faq-item.active .faq-question span {
+  transform: rotate(45deg);
+}
+.contact-section {
+  padding: 100px 7%;
+}
+
+.contact-container {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(260px,1fr));
+
+  gap: 25px;
+
+  margin-top: 50px;
+}
+
+.contact-card {
+  background:
+    rgba(255,255,255,0.72);
+
+  border:
+    1px solid rgba(255,255,255,0.8);
+
+  backdrop-filter:
+    blur(20px);
+
+  border-radius: 32px;
+
+  padding: 40px 30px;
+
+  text-align: center;
+
+  text-decoration: none;
+
+  transition: 0.4s ease;
+
+  box-shadow:
+    0 20px 60px rgba(109,93,252,0.10);
+}
+
+.contact-card:hover {
+  transform:
+    translateY(-10px)
+    scale(1.02);
+
+  box-shadow:
+    0 30px 80px rgba(109,93,252,0.16);
+}
+
+.contact-card img {
+  width: 70px;
+  height: 70px;
+
   object-fit: contain;
-  border-radius: 10px;
-  background: white;
-  padding: 5px;
+
+  margin-bottom: 20px;
 }
-.card small {
-  color: #888;
-  font-size: 12px;
+
+.contact-card h3 {
+  color: #0f172a;
+
+  font-size: 1.5rem;
+
+  margin-bottom: 12px;
 }
-.img-viewer {
+
+.contact-card p {
+  color: #64748b;
+
+  line-height: 1.8;
+}
+/* =========================
+   DYNAMIC ISLAND NAVBAR
+========================= */
+
+.dynamic-island {
+
   position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.9);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 99999;
-}
 
-.img-viewer img {
-  max-width: 90%;
-  max-height: 85%;
-  border-radius: 12px;
-  animation: zoomIn 0.3s ease;
-}
-
-.close-btn {
-  position: absolute;
   top: 20px;
-  right: 30px;
-  font-size: 35px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: calc(100% - 120px);
+  max-width: 1250px;
+
+  height: 78px;
+
+  padding: 0 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: rgba(255,255,255,0.18);
+
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+
+  border: 1px solid rgba(255,255,255,0.35);
+
+  border-radius: 999px;
+
+  box-shadow:
+    0 15px 45px rgba(0,0,0,0.12),
+    inset 0 1px 0 rgba(255,255,255,0.4);
+
+  z-index: 9999;
+
+  transition: 0.4s ease;
+}
+
+.dynamic-island:hover {
+
+  transform:
+    translateX(-50%)
+    scale(1.01);
+
+}
+
+.dynamic-island.scrolled {
+
+  height: 70px;
+
+  background: rgba(255,255,255,0.28);
+
+  box-shadow:
+    0 20px 60px rgba(109,93,252,0.18);
+
+}
+
+/* LOGO */
+
+.island-logo {
+
+  font-size: 1.4rem;
+
+  font-weight: 800;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6d5dfc,
+      #32d6ff
+    );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* NAV */
+
+.island-nav {
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+}
+
+.island-nav a {
+
+  text-decoration: none;
+
+  color: #334155;
+
+  font-weight: 600;
+
+  padding: 12px 18px;
+
+  border-radius: 999px;
+
+  transition: 0.3s ease;
+}
+
+.island-nav a:hover {
+
+  background: rgba(109,93,252,0.1);
+
+  color: #111827;
+
+  transform: translateY(-2px);
+
+}
+
+/* BUTTON */
+
+.island-btn {
+
+  text-decoration: none;
+
+  padding: 13px 22px;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6d5dfc,
+      #32d6ff
+    );
+
   color: white;
+
+  font-weight: 700;
+
+  transition: 0.35s ease;
+
+  box-shadow:
+    0 10px 30px rgba(109,93,252,0.25);
+}
+
+.island-btn:hover {
+
+  transform:
+    translateY(-3px)
+    scale(1.03);
+
+}
+
+/* MOBILE TOGGLE */
+
+.island-toggle {
+
+  display: none;
+
+  flex-direction: column;
+
+  gap: 5px;
+
   cursor: pointer;
 }
 
-@keyframes zoomIn {
-  from {transform: scale(0.8); opacity: 0;}
-  to {transform: scale(1); opacity: 1;}
-}
-.card img {
-  cursor: pointer;
-  transition: 0.2s;
+.island-toggle span {
+
+  width: 24px;
+  height: 3px;
+
+  border-radius: 999px;
+
+  background: #111827;
+
+  transition: 0.3s;
 }
 
-.card img:hover {
-  transform: scale(1.03);
-}
-.card img{
-  width:100%;
-  height:180px;
-  object-fit:cover;
-  object-position:center;
-  border-radius:10px;
-}
-.container {
-  padding: 15px;
-  max-width: 900px; /* sebelumnya 1100 */
-}
-.card {
-  padding: 12px;
-  border-radius: 12px;
-}
-.grid {
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-}
-@media (max-width: 600px) {
-  header h1 {
-    font-size: 18px;
-  }
+/* MOBILE MENU */
 
-  .section-title {
-    font-size: 16px;
-  }
+.mobile-menu {
 
-  .card {
-    padding: 10px;
-  }
-
-  .card img {
-    height: 140px;
-  }
-}
-#scrollBtn {
   position: fixed;
-  bottom: 90px; /* biar di atas WA */
-  right: 20px;
 
-  width: 50px;
-  height: 50px;
+  top: 105px;
+  left: 50%;
 
-  background: #1e3a8a;
+  transform:
+    translateX(-50%)
+    translateY(-20px);
+
+  width: calc(100% - 40px);
+  max-width: 400px;
+
+  background: rgba(255,255,255,0.2);
+
+  backdrop-filter: blur(24px);
+
+  border: 1px solid rgba(255,255,255,0.35);
+
+  border-radius: 30px;
+
+  padding: 18px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 12px;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition: 0.35s ease;
+
+  z-index: 9998;
+}
+
+.mobile-menu.active {
+
+  opacity: 1;
+  visibility: visible;
+
+  transform:
+    translateX(-50%)
+    translateY(0);
+
+}
+
+.mobile-menu a {
+
+  text-decoration: none;
+
+  color: #111827;
+
+  background: rgba(255,255,255,0.55);
+
+  padding: 15px 18px;
+
+  border-radius: 18px;
+
+  font-weight: 600;
+
+  transition: 0.3s ease;
+}
+
+.mobile-menu a:hover {
+
+  transform: scale(1.02);
+
+  background: white;
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 900px){
+
+  .dynamic-island {
+
+    width: calc(100% - 30px);
+
+    padding: 0 20px;
+  }
+
+  .island-nav,
+  .island-btn {
+
+    display: none;
+  }
+
+  .island-toggle {
+
+    display: flex;
+  }
+
+}
+/* ACTIVE MENU */
+
+.island-nav a.active,
+.mobile-menu a.active {
+
+  background:
+    linear-gradient(
+      135deg,
+      #6d5dfc,
+      #32d6ff
+    );
+
   color: white;
-  border: none;
 
-  border-radius: 50%; /* 🔥 ini bikin bulat sempurna */
+  box-shadow:
+    0 10px 25px rgba(109,93,252,0.25);
+
+}
+.dynamic-island {
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+/* state hidden */
+.dynamic-island.hide-navbar {
+  transform: translateX(-50%) translateY(-120%);
+  opacity: 0;
+}
+.dynamic-island.minimized {
+  width: 160px !important;
+  height: 52px !important;
+  padding: 0 18px !important;
+
+  border-radius: 999px;
+
+  justify-content: center;
+  gap: 0;
+
+  overflow: hidden;
+
+  transition: all 0.4s ease;
+}
+
+.dynamic-island.minimized .island-nav,
+.dynamic-island.minimized .island-btn {
+  display: none;
+}
+
+.dynamic-island.minimized .island-logo {
+  font-size: 1.1rem;
+}
+.floating-wa {
+  position: fixed;
+
+  right: 18px;
+  bottom: 18px;
+
+  width: 52px;
+  height: 52px;
+
+  border-radius: 50%;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  font-size: 20px;
-  cursor: pointer;
+  text-decoration: none;
 
-  z-index: 999;
+  background:
+    linear-gradient(
+      135deg,
+      #25D366,
+      #1ebe5d
+    );
 
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-  transition: 0.25s;
+  box-shadow:
+    0 10px 25px rgba(37,211,102,0.28);
+
+  z-index: 9999;
+
+  transition: 0.3s ease;
+
+  animation: waFloat 2s infinite ease-in-out;
 }
 
-#scrollBtn:hover {
-  transform: scale(1.1);
+.floating-wa:hover {
+
+  transform:
+    translateY(-5px)
+    scale(1.05);
+
 }
-#scrollBtn:active {
-  transform: scale(0.9);
-}
-.video-box{
-  width:100%;
-  max-width:700px;
-  margin:20px auto;
-  border-radius:16px;
-  overflow:hidden;
-  box-shadow:0 6px 20px rgba(0,0,0,0.25);
-  aspect-ratio:16/9;
-  background:#000;
-}
+/* =========================
+   MOBILE VIDEO FIX
+========================= */
 
-.video-box iframe{
-  width:100%;
-  height:100%;
-  display:block;
-  border:none;
-}
+@media (max-width: 768px){
 
-
-
-
-
-
-
-	
-	
-	
-  </style>
-  <div id="welcomePopup">
-  <div class="welcome-box">
-    <h1>Selamat Datang 👋</h1>
-    <p>Di Wira Audio Banjarbaru</p>
-  </div>
-</div>
-</head>
-<a href="https://wa.me/6282337354131?text=Halo%20kak,%20saya%20butuh%20bantuan" 
-   target="_blank" 
-   class="wa-container">
-
-  <div class="wa-text">Butuh Bantuan?</div>
-
-  <div class="wa-icon">
-    <svg viewBox="0 0 32 32" width="24" height="24">
-      <path fill="white" d="M16 .396C7.163.396 0 7.558 0 16.396c0 2.894.756 5.716 2.197 8.204L0 32l7.592-2.157a15.92 15.92 0 0 0 8.408 2.413c8.837 0 16-7.163 16-16S24.837.396 16 .396zm0 29.07a13.01 13.01 0 0 1-6.646-1.81l-.476-.282-4.506 1.28 1.202-4.39-.31-.45a12.93 12.93 0 0 1-2.008-6.918c0-7.168 5.832-13 13-13s13 5.832 13 13-5.832 13-13 13zm7.39-9.724c-.403-.202-2.387-1.177-2.757-1.31-.37-.134-.64-.202-.91.202s-1.044 1.31-1.28 1.58c-.235.27-.47.303-.873.1-.403-.202-1.7-.627-3.24-2-1.198-1.07-2.008-2.39-2.243-2.793-.235-.404-.025-.623.177-.825.182-.18.403-.47.605-.705.202-.235.27-.403.403-.672.134-.27.067-.504-.034-.706-.1-.202-.91-2.19-1.247-3-.327-.787-.66-.68-.91-.693-.235-.012-.504-.015-.774-.015-.27 0-.706.1-1.075.504-.37.403-1.41 1.378-1.41 3.356 0 1.98 1.445 3.89 1.647 4.158.202.27 2.843 4.34 6.89 6.08.963.415 1.713.663 2.298.848.965.307 1.844.264 2.538.16.774-.115 2.387-.975 2.724-1.918.336-.944.336-1.754.235-1.918-.1-.164-.37-.27-.774-.47z"/>
-    </svg>
-  </div>
-
-</a>
-
-
-<header>
-  <div class="header-content">
-    <img src="assets/logo.png" alt="Logo Wiracom" class="logo">
-    
-    <div>
-      <h1>Wira Audio Banjarbaru</h1>
-      <p>Ahlinya Sound System Masjid dan Mushala</p>
-    </div>
-  </div>
-</header>
-<div id="infoBar" style="background:#facc15;color:#000;padding:10px;text-align:center;font-weight:bold;transition:0.5s;">
-  🔥 Free Cheking dan Tuning ruangan 🔥
-</div>
-
-
-
-
-</div>
-
- 
-<div class="video-box">
-  <iframe
-    src="https://www.youtube.com/embed/L_II1YCYjjI?autoplay=1&mute=1&loop=1&playlist=L_II1YCYjjI"
-    title="YouTube video player"
-    frameborder="0"
-    allow="autoplay; encrypted-media; picture-in-picture"
-    allowfullscreen>
-  </iframe>
-</div>
-
-
- 
-
- 
-
-
-  
-
-
-
-</div>
-  
-  <div class="container">
-  <div class="section-title">Kegiatan Kami</div>
-
-  <div class="grid">
-
-    <div class="card">
-      <img src="assets/kegiatan/uas.jpg" alt="Kajian UAS">
-      <h3>Kajian UAS di Banjarbaru</h3>
-      <p><small>2 Feb 2026</small></p>
-      <p>
-        2 Feb 2026 Kajian UAS di Gunung Kupang Masjid Ponpes Nurul Azhar. Wira Audio Banjarbaru, untuk kedua kalinya di percaya meng handle acara pengajian UAS. Alhamdulillah TUAN Guru puas dengan Sound System kami pasang di masjid beliau.
-      </p>
-     
-	  <a class="btn-wa" href="https://wa.me/6282337354131">
-  Tanya Layanan Ini
-</a>
-    </div>
-
-    <div class="card">
-      <img src="assets/kegiatan/Ridho Febri.jpg" alt="Sound System Masjid">
-      <h3>Kajian Ustad Ridho Febri</h3>
-      <p><small>29 April 2024</small></p>
-      <p>
-        29 April 2024 Kajian Ustadz Ridho Febri di Masjid Arraudhah wiyata. Untuk kedua kalinya beliau hadi di Masjid Arraudhah Wiyata Banarbaru, Alhamdulillah beliau sangat puas dengan hasil produksi sound system yang kami kerjakan
-      </p>
-
-	  <a class="btn-wa" href="https://wa.me/6282337354131">
-  Tanya Layanan Ini
-</a>
-    </div>
-	
-		
-
-    <div class="card">
-      <img src="assets/kegiatan/binuang.jpg" alt="Kajian UAS">
-      <h3>Maulid Habsyi di binuang</h3>
-      <p><small>2 Feb 2026</small></p>
-      <p>
-        2 Feb 2026 Maulid Habsyi di Majelis Binuang, menggunakan speaker JBL EON7 dan mixer MIDAS MR18, dengan system mixer digital sangat memudahkan kegiatan bermajelis, tidak perlu lagi membawa berbagai macam aksesoris audio seperti effek dan yang lainya
-      </p>
-     
-	  <a class="btn-wa" href="https://wa.me/6282337354131">
-  Tanya Layanan Ini
-</a>
-    </div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-    
-</div>
-
-  
-
-  
-
- 
-  
-  
-
-<div class="section-title">📍 Lokasi Toko</div>
-<div class="map">
-  <iframe 
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4765.650417756335!2d114.79806417573798!3d-3.4443953417949262!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de6822ad1ccd5df%3A0xa14f334dfa15a38e!2sWIRACOM%20Banjarbaru!5e1!3m2!1sid!2sid!4v1777520326139!5m2!1sid!2sid"
-    width="100%" 
-    height="350"
-    style="border:0;"
-    allowfullscreen=""
-    loading="lazy">
-  </iframe>
-</div>
-<div class="footer-info">
-
-  <div class="footer-grid">
-
-    <!-- FAQ -->
-    <div class="footer-box">
-  <h3>❓ FAQ</h3>
-
-  <div class="faq">
-
-    <div class="faq-item">
-      <button class="faq-question">Apakah bisa panggilan ke luar kota?</button>
-      <div class="faq-answer">
-        Bisa 😁 tergantung lokasi dan jenis service yang dibutuhkan.
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-question">Apakah ada layanan after sales?</button>
-      <div class="faq-answer">
-        Ada untuk beberapa layanan seperti Amplifier, mixer dan speaker.
-      </div>
-    </div>
-
- 
-    <div class="faq-item">
-      <button class="faq-question">Berapa lama proses service?</button>
-      <div class="faq-answer">
-        Tergantung kerusakan, biasanya 1–5 hari untuk kerusakan ringan.
-      </div>
-    </div>
-	
-
-
-  </div>
-</div>
-
-    <!-- Kontak -->
-    <div class="footer-box">
-      <h3>📞 Kontak</h3>
-      <p>WhatsApp: 0823-3735-4131</p>
-      <p>Email: wiranet.bjb@gmail.com</p>
-	  <p>Facebook: @Muchtar Rusliadi Azthar</p>
-	  <p>Instagram: @wiranet.bjb
-    </div>
-
-    <!-- Lokasi -->
-    <div class="footer-box">
-      <h3>📍 Lokasi</h3>
-      <p>Banjarbaru, Kalimantan Selatan</p>
-      <p>Jl. Sidomulyo II, Guntung Payung, Kec. Landasan Ulin, Kota Banjar Baru, Kalimantan Selatan 70721</p>
-    </div>
-
-    <!-- Jam -->
-    <div class="footer-box">
-      <h3>⏰ Jam Operasional</h3>
-      <p>Senin - Sabtu</p>
-      <p>08.00 - 17.00</p>
-      <p>Minggu: Tutup</p>
-    </div>
-
-  </div>
-
-</div>
-<footer>
-  © 2026 Wiracom Banjarbaru
-</footer>
-<div id="imgViewer" class="img-viewer">
-  <span class="close-btn">&times;</span>
-  <img id="viewerImg" src="">
-</div>
-<button id="scrollBtn">⬇</button>
-<script>
-console.log("JS jalan");
-function searchProduk(){
-  let input = document.getElementById('search').value.toLowerCase();
-  let items = document.getElementsByClassName('produk');
-
-  for(let i=0;i<items.length;i++){
-    let text = items[i].innerText.toLowerCase();
-    items[i].style.display = text.includes(input) ? 'block' : 'none';
+  .featured-video{
+    padding: 60px 8px;
   }
+
+  .featured-video-box{
+    display:flex;
+    flex-direction:column;
+
+    padding:15px;
+
+    gap:20px;
+
+    border-radius:25px;
+  }
+
+  .featured-player{
+    width:100%;
+
+    margin:0;
+
+    border-radius:20px;
+  }
+
+  .video-wrapper{
+    width:100%;
+    padding-top:56.25%;
+  }
+
+  .video-wrapper iframe{
+    width:100%;
+    height:100%;
+
+    border-radius:20px;
+  }
+
+  .featured-text h1{
+    font-size:1.9rem;
+  }
+
+}
+/* =========================
+   BRANDS
+========================= */
+
+.brands{
+    padding:80px 20px;
+    text-align:center;
 }
 
-function kirimWA(btn){
-  var card = btn.closest('.card');
-  var nama = card.querySelector('.nama-produk').innerText;
-
-  var nomor = "6282337354131"; // ganti
-  var pesan = "Halo kak, saya mau beli " + nama;
-
-  var url = "https://wa.me/" + nomor + "?text=" + encodeURIComponent(pesan);
-
-  window.open(url, '_blank');
+.brands-header h2{
+    font-size:2rem;
+    margin-bottom:10px;
 }
-function revealOnScroll(){
-  let elements = document.querySelectorAll('.anim');
 
-  elements.forEach(el => {
-    let posisi = el.getBoundingClientRect().top;
-    let tinggiLayar = window.innerHeight;
+.brands-header p{
+    color:#aaa;
+    margin-bottom:40px;
+}
 
-    if(posisi < tinggiLayar - 100){
-      el.classList.add('show');
+.brands-slider{
+    overflow:hidden;
+    position:relative;
+    width:100%;
+}
+
+.brands-track{
+    display:flex;
+    align-items:center;
+    gap:80px;
+
+    width:max-content;
+
+    animation:scrollBrands 20s linear infinite;
+}
+
+.brands-track img{
+    height:60px;
+
+    opacity:.85;
+
+    transition:.3s;
+}
+
+.brands-track img:hover{
+    opacity:1;
+    transform:scale(1.08);
+}
+
+@keyframes scrollBrands{
+    from{
+        transform:translateX(0);
     }
-  });
+    to{
+        transform:translateX(-50%);
+    }
 }
 
-window.addEventListener('scroll', revealOnScroll);
-window.addEventListener('load', revealOnScroll);
-window.addEventListener("load", function(){
-  setTimeout(function(){
 
-    const skeleton = document.getElementById("skeletonLoading");
-    const produk = document.getElementById("produkAsli");
+</style>
+<a
+  href="https://wa.me/6282337354131"
+  class="floating-wa"
+  target="_blank">
 
-    if (skeleton) skeleton.style.display = "none";
-    if (produk) produk.style.display = "grid";
+  <img
+    src="https://cdn-icons-png.flaticon.com/512/733/733585.png"
+    alt="WhatsApp">
 
-  }, 1200);
+</a>
+</head>
+<div class="modal" id="modal">
+
+  <div class="modal-content">
+
+    <span class="close-modal">&times;</span>
+
+    <img id="modalImg" src="" alt="">
+
+    <h2 id="modalTitle"></h2>
+
+    <p id="modalDesc"></p>
+
+  </div>
+
+</div>
+<body>
+
+<div class="cursor-blur"></div>
+    <div id="loader">
+
+  <div class="loader-content">
+
+    <div class="loader-logo">
+      Wira Audio
+    </div>
+
+    <div class="loader-wave">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <p>Selamat Datang di website kami 😁</p>
+
+  </div>
+
+</div>
+
+  <div class="grid-bg"></div>
+
+ <!-- ===== DYNAMIC ISLAND NAVBAR ===== -->
+
+<header class="dynamic-island" id="dynamicIsland">
+
+  <div class="island-logo">
+     Wira Audio
+  </div>
+
+  <nav class="island-nav">
+
+  <a href="#home">Home</a>
+
+  <a href="#layanan">Layanan</a>
+
+  <a href="#portfolio">Kegiatan Kami</a>
+
+  <a href="#kontak">Kontak</a>
+
+  <a href="https://wirastore.vercel.app/">Produk Kami</a>
+
+</nav>
+
+  <a
+    href="https://wa.me/6282337354131"
+    target="_blank"
+    class="island-btn">
+
+    Hubungi Kami
+
+  </a>
+
+  <!-- MOBILE TOGGLE -->
+
+  <div class="island-toggle" id="islandToggle">
+
+    <span></span>
+    <span></span>
+    <span></span>
+
+  </div>
+
+</header>
+
+<!-- MOBILE MENU -->
+
+<div class="mobile-menu" id="mobileMenu">
+
+  <a href="#home">🏠 Home</a>
+
+  <a href="#layanan">🎤 Layanan</a>
+
+  <a href="#portfolio">🔥 Kegiatan Kami</a>
+
+  <a href="#kontak">📞 Kontak</a>
+
+  <a
+    href="https://wa.me/6282337354131"
+    target="_blank">
+
+    💬 Hubungi Kami
+
+  </a>
+  <a href="https://wirastore.vercel.app/" class="nav-product-btn">
+  🛒 Produk Kami
+</a>
+
+</div>
+
+
+  <section class="hero" id="home">
+    <div class="hero-text">
+      
+
+      <h1>
+        
+         <span>Wira Audio Banjarbaru</span>
+      </h1>
+
+      <p>
+        Wira Audio Banjarbaru menyediakan jasa sound system profesional,
+        perbaikan sound system, dan audio berkualitas tinggi untuk acara2,
+        wedding, event sekolah, gathering, hingga acara besar lainnya.
+      </p>
+
+      <div class="hero-buttons">
+      
+<a href="#portfolio" class="btn btn-secondary">
+  Lihat Kegiatan Kami
+</a>      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="audio-box">
+        <div class="audio-content">
+          <div class="speaker"></div>
+
+          <div class="wave">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<section class="featured-video">
+
+  <div class="featured-video-box">
+
+    <div class="featured-text">
+
+      <span class="video-tag">
+        🔥 Video Utama Wira Audio Banjarbaru
+      </span>
+
+      <h1>
+        Sound System Profesional<br>
+        Untuk Semua Event Besar
+      </h1>
+
+      <p>
+        Dokumentasi kegiatan dan setup audio terbaik dari Wira Audio Banjarbaru.
+      </p>
+
+    </div>
+
+    <div class="featured-player">
+
+      <div class="video-wrapper">
+        <iframe
+          src="https://www.youtube.com/embed/L_II1YCYjjI?rel=0"
+          title="YouTube video player"
+          allow="autoplay; encrypted-media; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+</section>
+  <section id="layanan">
+    <div class="section-title">
+      <h2>Layanan Kami</h2>
+      <p>
+        Audio jernih, bass nendang, lighting modern, dan setup profesional
+        untuk semua jenis acara.
+      </p>
+    </div>
+
+    <div class="services">
+      <div class="service-card reveal">
+        <div class="icon">🎤</div>
+        <h3>service Sound System</h3>
+        <p>
+          service sound system memperbaiki semua masalah.
+        </p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="icon">🎤</div>
+        <h3>Sewa Sound System</h3>
+        <p>
+          Sewa sound system untuk acara2, wedding, event sekolah, hingga acara besar lainnya.
+        </p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="icon">🎤</div>
+        <h3>Pemasangan speaker masjid / mushala</h3>
+        <p>
+          pemasangan speaker yang sesuai untuk kebutuhan masjid dan mushala.
+        </p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="icon">🤝</div>
+        <h3>Full Support Event</h3>
+        <p>
+          Tim profesional siap membantu setup hingga acara selesai.
+        </p>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat-box">
+        <h3>50+</h3>
+        <p>sudah memperbaiki sound system</p>
+      </div>
+
+      <div class="stat-box">
+        <h3>5★</h3>
+        <p>Rating Pelanggan</p>
+      </div>
+
+      <div class="stat-box">
+        <h3>13+</h3>
+        <p>Tahun Pengalaman</p>
+      </div>
+
+      
+    </div>
+  </section>
+
+  <section id="portfolio">
+
+  <div class="section-title">
+    <h2>Kegiatan Kami</h2>
+
+    <p>
+      Dokumentasi kegiatan dan event yang telah ditangani oleh
+      Wira Audio Banjarbaru.
+    </p>
+  </div>
+
+  <div class="gallery">
+
+    <div class="gallery-card reveal"
+      data-title="Kajian UAS di Banjarbaru"
+      data-desc="2 Feb 2026 Kajian UAS di Gunung Kupang Masjid Ponpes Nurul Azhar. Wira Audio Banjarbaru, untuk kedua kalinya di percaya meng handle acara pengajian UAS. Alhamdulillah TUAN Guru puas dengan Sound System kami pasang di masjid beliau."
+      data-img="assets/img/kegiatan2.jpg">
+
+      <img src="assets/img/kegiatan2.jpg" alt="">
+
+      <div class="gallery-info">
+        <h3>Kajian UAS di Banjarbaru</h3>
+        <p>Klik untuk detail</p>
+      </div>
+    </div>
+
+    <div class="gallery-card reveal"
+      data-title="Kajian Ustad Ridho Febri"
+      data-desc="29 April 2024 Kajian Ustadz Ridho Febri di Masjid Arraudhah wiyata. Untuk kedua kalinya beliau hadi di Masjid Arraudhah Wiyata Banarbaru, Alhamdulillah beliau sangat puas dengan hasil produksi sound system yang kami kerjakan."
+      data-img="assets/img/kegiatan1.jpg">
+
+      <img src="assets/img/kegiatan1.jpg" alt="">
+
+      <div class="gallery-info">
+        <h3>Kajian Ustad Ridho Febri</h3>
+        <p>Klik untuk detail</p>
+      </div>
+    </div>
+
+    <div class="gallery-card reveal"
+      data-title="Maulid Habsyi di binuang"
+      data-desc="2 Feb 2026 Maulid Habsyi di Majelis Binuang, menggunakan speaker JBL EON7 dan mixer MIDAS MR18, dengan system mixer digital sangat memudahkan kegiatan bermajelis, tidak perlu lagi membawa berbagai macam aksesoris audio seperti effek dan yang lainya."
+      data-img="assets/img/kegiatan3.jpg">
+
+      <img src="assets/img/kegiatan3.jpg" alt="">
+
+      <div class="gallery-info">
+        <h3>Maulid Habsyi di binuang</h3>
+        <p>Klik untuk detail</p>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+  <section class="cta" id="kontak">
+    <div class="cta-box">
+      <h2>Siap Membuat Eventmu Lebih Pecah? 🔥</h2>
+
+      <p>
+        Percayakan kebutuhan audio dan lighting eventmu kepada Wira Audio Banjarbaru.
+        Profesional, modern, dan siap membuat acara jadi lebih meriah.
+      </p>
+
+      <a
+  href="https://wa.me/6282337354131?text=Halo%20Wira%20Audio%20Banjarbaru%2C%20saya%20ingin%20bertanya%20tentang%20sound%20system"
+  class="btn"
+  target="_blank">
+
+  Chat WhatsApp
+
+</a>
+    </div>
+  </section>
+<section class="maps-section">
+
+  <div class="section-title">
+    <h2>Lokasi Kami</h2>
+
+    <p>
+      Temukan lokasi Wira Audio Banjarbaru
+      langsung melalui Google Maps 😁
+    </p>
+  </div>
+
+  <div class="maps-box">
+
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4765.650417756335!2d114.79806417573798!3d-3.4443953417949262!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de6822ad1ccd5df%3A0xa14f334dfa15a38e!2sWIRACOM%20Banjarbaru!5e1!3m2!1sid!2sid!4v1779866113376!5m2!1sid!2sid"
+      style="border:0;"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+
+  </div>
+<section class="brands">
+    <div class="brands-header">
+        <h2>Brand yang Pernah Kami Gunakan</h2>
+        <p>Menggunakan peralatan audio berkualitas dari brand terpercaya.</p>
+    </div>
+
+    <div class="brands-slider">
+        <div class="brands-track">
+
+            <!-- Set 1 -->
+            <img src="assets/brands/jbl.png" alt="JBL">
+            <img src="assets/brands/yamaha.png" alt="Yamaha">
+            <img src="assets/brands/shure.png" alt="Shure">
+            <img src="assets/brands/midas.png" alt="Midas">
+            <img src="assets/brands/behringer.png" alt="Behringer">
+
+            <!-- Duplikat supaya looping mulus -->
+            <img src="assets/brands/jbl.png" alt="JBL">
+            <img src="assets/brands/yamaha.png" alt="Yamaha">
+            <img src="assets/brands/shure.png" alt="Shure">
+            <img src="assets/brands/midas.png" alt="Midas">
+            <img src="assets/brands/behringer.png" alt="Behringer">
+
+        </div>
+    </div>
+</section>
+</section>
+<section class="contact-section">
+
+  <div class="section-title">
+    <h2>Kontak Kami</h2>
+
+    <p>
+      Hubungi Wira Audio Banjarbaru
+      melalui sosial media berikut 😁
+    </p>
+  </div>
+
+  <div class="contact-container">
+
+    <!-- FACEBOOK -->
+    <a
+      href="https://facebook.com/"
+      target="_blank"
+      class="contact-card">
+
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/733/733547.png"
+        alt="Facebook">
+
+      <h3>Facebook</h3>
+
+      
+
+    </a>
+
+    <!-- INSTAGRAM -->
+    <a
+      href="https://instagram.com/"
+      target="_blank"
+      class="contact-card">
+
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
+        alt="Instagram">
+
+      <h3>Instagram</h3>
+
+      
+
+    </a>
+
+    <!-- WHATSAPP -->
+    <a
+      href="https://wa.me/6281234567890"
+      target="_blank"
+      class="contact-card">
+
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/733/733585.png"
+        alt="WhatsApp">
+
+      <h3>WhatsApp</h3>
+
+      
+
+    </a>
+
+  </div>
+
+</section>
+<section class="faq-section">
+
+  <div class="section-title">
+    <h2>FAQ</h2>
+
+    <p>
+      Pertanyaan yang sering ditanyakan
+      pelanggan Wira Audio Banjarbaru 😁
+    </p>
+  </div>
+
+  <div class="faq-container">
+
+    <div class="faq-item">
+
+      <button class="faq-question">
+        Apakah bisa untuk acara wedding?
+        <span>+</span>
+      </button>
+
+      <div class="faq-answer">
+        <p>
+          Tentu 😎 Wira Audio siap menangani
+          wedding indoor maupun outdoor
+          dengan sound system premium.
+        </p>
+      </div>
+
+    </div>
+
+    
+
+    <div class="faq-item">
+
+      <button class="faq-question">
+        Bisa booking untuk konser besar?
+        <span>+</span>
+      </button>
+
+      <div class="faq-answer">
+        <p>
+          Bisa 🔥 Kami siap menangani event besar,
+          konser musik, festival sekolah,
+          gathering, dan lainnya.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="faq-item">
+
+      <button class="faq-question">
+        Area layanan sampai mana?
+        <span>+</span>
+      </button>
+
+      <div class="faq-answer">
+        <p>
+          Area Banjarbaru, Banjarmasin,
+          Martapura, dan sekitarnya 
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+  <footer>
+    <div>
+      © 2026 Wira Audio Banjarbaru — All Rights Reserved.
+    </div>
+
+    <div class="socials">
+
+  <a
+    href="https://facebook.com/"
+    target="_blank">
+
+    <img
+      src="https://cdn-icons-png.flaticon.com/512/733/733547.png"
+      alt="Facebook">
+
+  </a>
+
+  <a
+    href="https://instagram.com/"
+    target="_blank">
+
+    <img
+      src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
+      alt="Instagram">
+
+  </a>
+
+  
+
+</div>
+  </footer>
+
+  <script>
+    const cards = document.querySelectorAll('.service-card');
+
+    cards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        card.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(0,212,255,0.18), rgba(255,255,255,0.05))`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.background = 'rgba(255,255,255,0.06)';
+      });
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+    window.addEventListener('scroll', () => {
+  const header = document.querySelector('header');
+
+  if(window.scrollY > 30){
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
 });
-const infoBar = document.getElementById("infoBar");
+const galleryCards = document.querySelectorAll('.gallery-card');
 
-const messages = [
-  "🔥 Service Berbagai Macam Perangkat Audio 🔥",
-  "🕒 Workshoop Senin - Sabtu: 08.00 - 17.00 | Minggu: Tutup",
-  "💻 Utamakan Kejelasan dan Kenyamanan Jamaah",
-  "📍 Wira Audio Banjarbaru siap membantu kebutuhan sound system anda"
-];
+const modal = document.getElementById('modal');
 
-let index = 0;
+const modalImg = document.getElementById('modalImg');
 
-setInterval(() => {
-  // fade out
-  infoBar.style.opacity = 0;
+const modalTitle = document.getElementById('modalTitle');
+
+const modalDesc = document.getElementById('modalDesc');
+
+const closeModal = document.querySelector('.close-modal');
+
+galleryCards.forEach(card => {
+
+  card.addEventListener('click', () => {
+
+    modal.classList.add('active');
+
+    modalImg.src = card.dataset.img;
+
+    modalTitle.textContent = card.dataset.title;
+
+    modalDesc.textContent = card.dataset.desc;
+
+  });
+
+});
+
+closeModal.addEventListener('click', () => {
+  modal.classList.remove('active');
+});
+
+modal.addEventListener('click', (e) => {
+
+  if(e.target === modal){
+    modal.classList.remove('active');
+  }
+
+});
+window.addEventListener('load', () => {
+
+  const loader =
+    document.getElementById('loader');
 
   setTimeout(() => {
-    index = (index + 1) % messages.length;
-    infoBar.innerHTML = messages[index];
 
-    // fade in
-    infoBar.style.opacity = 1;
-  }, 400);
+    loader.classList.add('hide');
 
-}, 3500);
+  }, 1000);
 
-function chatRakit(jenis){
-  var nomor = "6282337354131"; // ganti nomor ayah kamu
-  var pesan = "Halo kak, saya mau konsultasi " + jenis;
+});
+const reveals =
+  document.querySelectorAll('.reveal');
 
-  var url = "https://wa.me/" + nomor + "?text=" + encodeURIComponent(pesan);
+window.addEventListener('scroll', revealElements);
 
-  window.open(url, '_blank');
-}
+function revealElements(){
 
+  reveals.forEach(el => {
 
-window.addEventListener("load", function () {
+    const windowHeight =
+      window.innerHeight;
 
-  const el = document.getElementById("layananScroll");
+    const revealTop =
+      el.getBoundingClientRect().top;
 
-  // duplicate biar infinite
-  el.innerHTML += el.innerHTML;
+    const revealPoint = 100;
 
-  let isDown = false;
-  let startX = 0;
-  let scrollStart = 0;
+    if(revealTop < windowHeight - revealPoint){
 
-  let velocity = 0;
-  let lastMove = 0;
-  let momentumID;
+      el.classList.add('active');
 
-  let autoSpeed = 0.4;
-  let autoRun = true;
-
-  // 🎯 AUTO SCROLL HALUS
-  function autoScroll() {
-    if (autoRun && !isDown) {
-      el.scrollLeft += autoSpeed;
-
-      if (el.scrollLeft >= el.scrollWidth / 2) {
-        el.scrollLeft = 0;
-      }
-    }
-    requestAnimationFrame(autoScroll);
-  }
-  autoScroll();
-
-  // 🎯 START DRAG
-  function startDrag(x) {
-    isDown = true;
-    autoRun = false;
-
-    startX = x;
-    scrollStart = el.scrollLeft;
-
-    velocity = 0;
-    lastMove = x;
-
-    cancelAnimationFrame(momentumID);
-  }
-
-  // 🎯 MOVE DRAG (SMOOTH VELOCITY)
-  function moveDrag(x) {
-    if (!isDown) return;
-
-    const dx = x - startX;
-
-    // smoothing velocity (ini kunci smooth)
-    velocity = (x - lastMove) * 0.8 + velocity * 0.2;
-    lastMove = x;
-
-    el.scrollLeft = scrollStart - dx;
-  }
-
-  // 🎯 END DRAG + MOMENTUM ULTRA SMOOTH
-  function endDrag() {
-    isDown = false;
-
-    function momentum() {
-      if (Math.abs(velocity) < 0.1) {
-        autoRun = true;
-        return;
-      }
-
-      el.scrollLeft -= velocity;
-
-      // friction super smooth
-      velocity *= 0.92;
-
-      momentumID = requestAnimationFrame(momentum);
     }
 
-    momentum();
+  });
+
+}
+
+revealElements();
+const blur =
+  document.querySelector('.cursor-blur');
+
+document.addEventListener('mousemove', (e) => {
+
+  blur.style.left =
+    e.clientX + 'px';
+
+  blur.style.top =
+    e.clientY + 'px';
+
+});
+const faqItems =
+  document.querySelectorAll('.faq-item');
+
+faqItems.forEach(item => {
+
+  const question =
+    item.querySelector('.faq-question');
+
+  question.addEventListener('click', () => {
+
+    item.classList.toggle('active');
+
+  });
+
+});
+/* MOBILE MENU */
+
+const islandToggle =
+  document.getElementById('islandToggle');
+
+const mobileMenu =
+  document.getElementById('mobileMenu');
+
+islandToggle.addEventListener('click', () => {
+
+  mobileMenu.classList.toggle('active');
+
+});
+
+/* SCROLL EFFECT */
+
+window.addEventListener('scroll', () => {
+
+  const island =
+    document.getElementById('dynamicIsland');
+
+  if(window.scrollY > 30){
+
+    island.classList.add('scrolled');
+
+  } else {
+
+    island.classList.remove('scrolled');
+
   }
 
-  // 🖱 DESKTOP
-  el.addEventListener("mousedown", e => startDrag(e.pageX));
-  el.addEventListener("mousemove", e => moveDrag(e.pageX));
-  el.addEventListener("mouseup", endDrag);
-  el.addEventListener("mouseleave", endDrag);
-
-  // 📱 MOBILE
-  el.addEventListener("touchstart", e => startDrag(e.touches[0].pageX));
-  el.addEventListener("touchmove", e => moveDrag(e.touches[0].pageX));
-  el.addEventListener("touchend", endDrag);
-
-});
-const text = document.getElementById("marqueeText");
-
-if (text) {
-  let speed = 15;
-  text.style.animationDuration = speed + "s";
-}
-
-
-
-window.addEventListener("DOMContentLoaded", () => {
-  const buttons = document.querySelectorAll(".faq-question");
-
-  buttons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      const answer = btn.nextElementSibling;
-      if (!answer) return;
-
-      const isOpen = answer.style.maxHeight && answer.style.maxHeight !== "0px";
-
-      if (isOpen) {
-        answer.style.maxHeight = "0px";
-        answer.style.padding = "0 12px";
-      } else {
-        answer.style.maxHeight = answer.scrollHeight + "px";
-        answer.style.padding = "10px 12px";
-      }
-    });
-  });
 });
 
-const backgrounds = [
-  "assets/bg/bekground1.png",
-  "assets/bg/bekground2.png",
-  "assets/bg/bekground3.png",
-  "assets/bg/bekground4.png"
-];
 
-let bgIndex = 0;
+/* ACTIVE NAVBAR MENU */
 
-function changeBackground() {
-  document.body.style.backgroundImage = `url('${backgrounds[bgIndex]}')`;
+const sections =
+  document.querySelectorAll("section");
 
-  bgIndex = (bgIndex + 1) % backgrounds.length;
-}
-
-// pertama kali load
-changeBackground();
-
-// ganti tiap 1 detik
-setInterval(changeBackground, 5000);
-
-
-
-function chatLayanan(btn){
-  var nomor = "6282337354131";
-
-  // ambil card parent
-  var card = btn.closest('.card');
-
-  // ambil judul layanan dari h3
-  var namaLayanan = card.querySelector('h3').innerText;
-
-  var pesan = `Halo kak 👋
-Saya mau tanya tentang layanan *${namaLayanan}*.
-
-Boleh minta info:
-- Estimasi biaya 💰
-- Lama pengerjaan ⏱️
-- Apakah bisa ditunggu / harus tinggal
-
-Terima kasih 🙏`;
-
-  var url = "https://wa.me/" + nomor + "?text=" + encodeURIComponent(pesan);
-
-  window.open(url, '_blank');
-}
-const viewer = document.getElementById("imgViewer");
-const viewerImg = document.getElementById("viewerImg");
-const closeBtn = document.querySelector(".close-btn");
-
-// klik semua gambar di card
-document.querySelectorAll(".card img").forEach(img => {
-  img.addEventListener("click", () => {
-    viewer.style.display = "flex";
-    viewerImg.src = img.src;
-  });
-});
-
-// tutup
-closeBtn.onclick = () => viewer.style.display = "none";
-viewer.onclick = (e) => {
-  if(e.target === viewer){
-    viewer.style.display = "none";
-  }
-};
-const scrollBtn = document.getElementById("scrollBtn");
+const navLinks =
+  document.querySelectorAll(
+    ".island-nav a, .mobile-menu a"
+  );
 
 window.addEventListener("scroll", () => {
-  const scrollPos = window.scrollY;
-  const pageHeight = document.body.scrollHeight - window.innerHeight;
 
-  // kalau sudah hampir bawah
-  if (scrollPos > pageHeight - 200) {
-    scrollBtn.innerHTML = "⬆";
-  } else {
-    scrollBtn.innerHTML = "⬇";
+  let current = "";
+
+  sections.forEach(section => {
+
+    const sectionTop =
+      section.offsetTop - 150;
+
+    const sectionHeight =
+      section.clientHeight;
+
+    if(scrollY >= sectionTop){
+
+      current =
+        section.getAttribute("id");
+
+    }
+
+  });
+
+  navLinks.forEach(link => {
+
+    link.classList.remove("active");
+
+    if(
+      link.getAttribute("href") ===
+      `#${current}`
+    ){
+
+      link.classList.add("active");
+
+    }
+
+  });
+
+});
+let lastScrollY = window.scrollY;
+const navbar = document.getElementById('dynamicIsland');
+
+window.addEventListener('scroll', () => {
+  const currentScrollY = window.scrollY;
+
+  // scroll turun → sembunyikan
+  if (currentScrollY > lastScrollY && currentScrollY > 80) {
+    navbar.classList.add('hide-navbar');
+  } 
+  // scroll naik → tampilkan
+  else {
+    navbar.classList.remove('hide-navbar');
+  }
+
+  lastScrollY = currentScrollY;
+});
+document.addEventListener('click', (e) => {
+  const menu = document.getElementById('mobileMenu');
+  const toggle = document.getElementById('islandToggle');
+
+  const isClickInsideMenu = menu.contains(e.target);
+  const isClickToggle = toggle.contains(e.target);
+
+  // kalau klik di luar keduanya → tutup menu
+  if (!isClickInsideMenu && !isClickToggle) {
+    menu.classList.remove('active');
   }
 });
-
-scrollBtn.addEventListener("click", () => {
-  const scrollPos = window.scrollY;
-  const pageHeight = document.body.scrollHeight - window.innerHeight;
-
-  if (scrollPos > pageHeight - 200) {
-    // kalau di bawah → ke atas
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-  } else {
-    // kalau di atas → ke bawah
-    window.scrollTo({
-      top: document.body.scrollHeight,
-      behavior: "smooth"
-    });
-  }
-});
-function chatRakitAuto(btn){
-  var nomor = "6282337354131";
-
-  var card = btn.closest('.card');
-  var nama = card.querySelector('h3').innerText;
-
-  var pesan = "Halo kak, saya mau konsultasi " + nama;
-
-  var url = "https://wa.me/" + nomor + "?text=" + encodeURIComponent(pesan);
-
-  window.open(url, '_blank');
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </script>
 
